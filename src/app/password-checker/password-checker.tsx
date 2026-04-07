@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Input from "@/components/ui/Input";
 
 interface Criterion {
   label: string;
@@ -61,23 +62,16 @@ export default function PasswordChecker() {
   return (
     <div className="space-y-3 sm:space-y-4">
       {/* Input */}
-      <div>
-        <label
-          htmlFor="pw-check-input"
-          className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
-        >
-          Enter Password
-        </label>
-        <input
-          id="pw-check-input"
-          type="text"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Type a password to check its strength..."
-          autoComplete="off"
-          className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2.5 font-mono text-base text-zinc-900 placeholder-zinc-400 focus:border-accent-purple focus:outline-none focus:ring-1 focus:ring-accent-purple sm:text-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder-zinc-600"
-        />
-      </div>
+      <Input
+        id="pw-check-input"
+        label="Enter Password"
+        type="text"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Type a password to check its strength..."
+        autoComplete="off"
+        className="font-mono"
+      />
 
       {result && (
         <>

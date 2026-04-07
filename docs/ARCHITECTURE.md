@@ -89,7 +89,7 @@ All reusable UI primitives live in `src/components/ui/`. When building tool UIs,
 | Component | Props | Usage |
 |-----------|-------|-------|
 | `Button` | `variant` (`primary`/`secondary`/`outline`/`danger`), `size` (`sm`/`md`/`lg`) | All clickable actions |
-| `Input` | `label?`, standard input props | Single-line text input |
+| `Input` | `label?`, `variant?` (`default`/`file`/`checkbox`/`range`), auto-detected from `type` | All `<input>` elements — text, date, time, file, checkbox, range. Consistent styling + brand accent. |
 | `Textarea` | `label?`, standard textarea props | Multi-line text input |
 | `Dropdown` | `label?`, `options: {label, value}[]`, `placeholder?`, `value?`, `onChange?: (value: string) => void` | Custom select with popover, keyboard nav, check icon (shadcn-style) |
 | `ToolCard` | `name`, `slug`, `description`, `category`, `badge?` (`"new"`/`"popular"`) | Tool grid cards (homepage + RelatedTools) — elevated, hover lift, category badge, arrow |

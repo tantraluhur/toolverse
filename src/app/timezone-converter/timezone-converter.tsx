@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Dropdown from "@/components/ui/Dropdown";
+import Input from "@/components/ui/Input";
 import CopyButton from "@/components/ui/CopyButton";
 
 const timezones = [
@@ -93,19 +94,29 @@ export default function TimezoneConverter() {
       </div>
 
       <div>
-        <label
-          htmlFor="datetime-input"
-          className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
-        >
+        <label className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
           Date & Time
         </label>
-        <input
-          id="datetime-input"
-          type="datetime-local"
-          value={dateInput}
-          onChange={(e) => setDateInput(e.target.value)}
-          className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2.5 text-base text-zinc-900 focus:border-accent-purple focus:outline-none focus:ring-1 focus:ring-accent-purple sm:text-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
-        />
+        <div className="flex flex-wrap gap-2">
+          <Input
+            type="date"
+            value={dateInput.slice(0, 10)}
+            onChange={(e) =>
+              setDateInput(
+                e.target.value + "T" + (dateInput.slice(11) || "12:00"),
+              )
+            }
+            className="w-auto"
+          />
+          <Input
+            type="time"
+            value={dateInput.slice(11, 16)}
+            onChange={(e) =>
+              setDateInput(dateInput.slice(0, 10) + "T" + e.target.value)
+            }
+            className="w-auto"
+          />
+        </div>
       </div>
 
       {/* Result */}

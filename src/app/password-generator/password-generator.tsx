@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 import CopyButton from "@/components/ui/CopyButton";
 
 const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
@@ -58,14 +59,13 @@ export default function PasswordGenerator() {
               {length}
             </span>
           </div>
-          <input
+          <Input
             id="pw-length"
             type="range"
             min={8}
             max={32}
             value={length}
             onChange={(e) => setLength(Number(e.target.value))}
-            className="w-full cursor-pointer accent-accent-purple"
           />
           <div className="mt-1 flex justify-between text-xs text-zinc-400">
             <span>8</span>
@@ -75,23 +75,26 @@ export default function PasswordGenerator() {
 
         {/* Toggles */}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <Toggle
+          <Input
             id="pw-uppercase"
+            type="checkbox"
             label="Uppercase (A-Z)"
             checked={uppercase}
-            onChange={setUppercase}
+            onChange={(e) => setUppercase(e.target.checked)}
           />
-          <Toggle
+          <Input
             id="pw-numbers"
+            type="checkbox"
             label="Numbers (0-9)"
             checked={numbers}
-            onChange={setNumbers}
+            onChange={(e) => setNumbers(e.target.checked)}
           />
-          <Toggle
+          <Input
             id="pw-symbols"
+            type="checkbox"
             label="Symbols (!@#...)"
             checked={symbols}
-            onChange={setSymbols}
+            onChange={(e) => setSymbols(e.target.checked)}
           />
         </div>
       </div>
@@ -116,33 +119,5 @@ export default function PasswordGenerator() {
         </div>
       )}
     </div>
-  );
-}
-
-function Toggle({
-  id,
-  label,
-  checked,
-  onChange,
-}: {
-  id: string;
-  label: string;
-  checked: boolean;
-  onChange: (value: boolean) => void;
-}) {
-  return (
-    <label
-      htmlFor={id}
-      className="flex cursor-pointer items-center gap-2.5 text-sm text-zinc-700 dark:text-zinc-300"
-    >
-      <input
-        id={id}
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-        className="h-4 w-4 cursor-pointer rounded border-zinc-300 accent-accent-purple"
-      />
-      {label}
-    </label>
   );
 }

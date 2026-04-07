@@ -9,6 +9,8 @@ All notable changes to Toolverse are documented here.
 - **Text Compare / Diff Checker** (`/text-compare`) — compare two texts side by side with line-by-line diff (LCS algorithm), color-coded added/removed/unchanged lines, live stats, swap button, no dependencies
 
 ### Changed (UI)
+- **Input component rebuilt** — now handles all input types: text, date, time, file, checkbox, range. Auto-detects variant from `type` prop. Consistent brand styling (accent-purple focus rings, accent slider/checkbox). Checkbox renders inline with label. All raw `<input>` elements across the codebase replaced: password-checker, password-generator (range + 3 checkboxes), color-picker (file), qr-code-scanner (file), timezone-converter (date + time).
+- **Age Calculator calendar** — replaced year/month arrow buttons with dropdown selectors. Year dropdown shows 120 years (scrollable, auto-scrolls to selected). Month dropdown with future months greyed out. One click to jump to any year/month.
 - **ToolCard component** (`src/components/ui/ToolCard.tsx`) — new purpose-built card for tool grids, replacing the generic Card usage. Features: elevated white card with shadow, rounded-xl corners, hover lift animation (-translate-y-0.5 + shadow-md), brand-colored hover states on title and border, color-coded category badge (blue/amber/pink/emerald per category), optional "New"/"Popular" badge, "Open tool →" arrow indicator, full card clickable via Link wrapper with group hover. Applied to homepage and all RelatedTools sections.
 
 ### Changed (Brand)

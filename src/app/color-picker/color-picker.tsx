@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 import CopyButton from "@/components/ui/CopyButton";
 
 interface PickedColor {
@@ -104,21 +105,13 @@ export default function ColorPicker() {
     <div className="space-y-3 sm:space-y-4">
       {/* Upload */}
       <div className="flex flex-wrap items-end gap-2">
-        <div>
-          <label
-            htmlFor="image-upload"
-            className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
-          >
-            Upload Image
-          </label>
-          <input
-            id="image-upload"
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            className="block w-full text-sm text-zinc-600 file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-accent-purple file:px-4 file:py-2.5 file:text-sm file:font-medium file:text-white hover:file:opacity-90 dark:text-zinc-400"
-          />
-        </div>
+        <Input
+          id="image-upload"
+          type="file"
+          label="Upload Image"
+          accept="image/*"
+          onChange={handleFileChange}
+        />
         {imageSrc && (
           <Button variant="outline" onClick={handleClear}>
             Clear
