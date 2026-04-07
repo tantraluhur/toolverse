@@ -20,6 +20,21 @@ export default function Navbar() {
     {} as Record<string, typeof tools>,
   );
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    };
+  }, [mobileOpen]);
+
   // Close dropdown on click outside
   useEffect(() => {
     if (!toolsOpen) return;
@@ -107,7 +122,10 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-zinc-200 bg-white px-4 pb-4 pt-2 sm:hidden dark:border-zinc-800 dark:bg-zinc-950">
+        <div
+          className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain border-t border-zinc-200 bg-white px-4 pb-8 pt-2 sm:hidden dark:border-zinc-800 dark:bg-zinc-950"
+          style={{ touchAction: "pan-y" }}
+        >
           <Link
             href="/"
             onClick={handleLinkClick}
@@ -117,7 +135,7 @@ export default function Navbar() {
           </Link>
 
           {Object.entries(grouped).map(([category, categoryTools]) => (
-            <div key={category} className="mt-2">
+            <div key={category} className="mt-3">
               <div className="py-1 text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
                 {categoryLabels[category as ToolCategory]}
               </div>
@@ -126,7 +144,7 @@ export default function Navbar() {
                   key={tool.slug}
                   href={`/${tool.slug}`}
                   onClick={handleLinkClick}
-                  className="block py-1.5 pl-2 text-sm text-zinc-700 dark:text-zinc-300"
+                  className="block py-2 pl-2 text-sm text-zinc-700 active:text-accent-purple dark:text-zinc-300 dark:active:text-accent-cyan"
                 >
                   {tool.name}
                 </Link>
