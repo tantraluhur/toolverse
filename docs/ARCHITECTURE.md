@@ -92,7 +92,8 @@ All reusable UI primitives live in `src/components/ui/`. When building tool UIs,
 | `Input` | `label?`, standard input props | Single-line text input |
 | `Textarea` | `label?`, standard textarea props | Multi-line text input |
 | `Dropdown` | `label?`, `options: {label, value}[]`, `placeholder?`, `value?`, `onChange?: (value: string) => void` | Custom select with popover, keyboard nav, check icon (shadcn-style) |
-| `Card` | Children-based, composable | Content containers |
+| `ToolCard` | `name`, `slug`, `description`, `category`, `badge?` (`"new"`/`"popular"`) | Tool grid cards (homepage + RelatedTools) — elevated, hover lift, category badge, arrow |
+| `Card` | Children-based, composable | Generic content containers |
 | `CardTitle` | — | Card heading |
 | `CardDescription` | — | Card subtitle text |
 | `Alert` | `variant` (`error`/`success`/`warning`/`info`) | Status/feedback messages |

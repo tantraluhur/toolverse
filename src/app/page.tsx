@@ -1,8 +1,16 @@
-import Link from "next/link";
 import { tools } from "@/lib/tools-registry";
 import { categoryLabels, type ToolCategory } from "@/types/tool";
-import Card, { CardTitle, CardDescription } from "@/components/ui/Card";
+import ToolCard from "@/components/ui/ToolCard";
 import JsonLd, { websiteJsonLd } from "@/components/layout/JsonLd";
+
+// Mark specific tools with badges
+const badges: Record<string, "new" | "popular"> = {
+  "json-formatter": "popular",
+  "password-generator": "popular",
+  "qr-code-generator": "popular",
+  "age-calculator": "new",
+  "text-compare": "new",
+};
 
 export default function Home() {
   const grouped = tools.reduce(
@@ -34,14 +42,16 @@ export default function Home() {
             <h2 className="mb-3 text-lg font-semibold text-zinc-800 sm:mb-4 sm:text-xl dark:text-zinc-200">
               {categoryLabels[category as ToolCategory]}
             </h2>
-            <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {categoryTools.map((tool) => (
-                <Link key={tool.slug} href={`/${tool.slug}`}>
-                  <Card className="h-full hover:border-accent-purple/40 hover:bg-accent-purple/5 dark:hover:border-accent-purple/30 dark:hover:bg-accent-purple/5">
-                    <CardTitle>{tool.name}</CardTitle>
-                    <CardDescription>{tool.description}</CardDescription>
-                  </Card>
-                </Link>
+                <ToolCard
+                  key={tool.slug}
+                  name={tool.name}
+                  slug={tool.slug}
+                  description={tool.description}
+                  category={tool.category}
+                  badge={badges[tool.slug]}
+                />
               ))}
             </div>
           </section>

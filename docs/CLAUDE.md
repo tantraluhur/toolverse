@@ -213,6 +213,7 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for folder structure, conventions, and 
 - Base64 Encoder & Decoder (`/base64-encoder`)
 - UUID Generator v4 (`/uuid-generator`)
 - JWT Decoder (`/jwt-decoder`)
+- Text Compare / Diff Checker (`/text-compare`)
 
 **Security**
 - Password Generator (`/password-generator`)
@@ -226,6 +227,7 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for folder structure, conventions, and 
 **Utilities**
 - Time Zone Converter (`/timezone-converter`)
 - Random Name Picker (`/random-name-picker`)
+- Age Calculator (`/age-calculator`)
 
 ### Project Structure
 - Shared layout (Navbar + Footer) in root layout

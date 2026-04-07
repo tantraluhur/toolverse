@@ -85,6 +85,20 @@ export const tools: Tool[] = [
       "Pick a random name from a list online for free. Perfect for giveaways, team assignments, and decisions.",
     category: "utility",
   },
+  {
+    name: "Text Compare (Diff Checker)",
+    slug: "text-compare",
+    description:
+      "Compare two texts side by side and see the differences highlighted. Free online diff checker for code, documents, and more.",
+    category: "dev",
+  },
+  {
+    name: "Age Calculator",
+    slug: "age-calculator",
+    description:
+      "Calculate your exact age in years, months, and days. See your next birthday countdown instantly.",
+    category: "utility",
+  },
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {

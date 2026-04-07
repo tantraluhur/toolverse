@@ -4,6 +4,13 @@ All notable changes to Toolverse are documented here.
 
 ## [Unreleased]
 
+### Added (Tools)
+- **Age Calculator** (`/age-calculator`) — calculate exact age in years, months, and days from date of birth. Shows total months, total days, and next birthday countdown. Handles leap years and edge cases. Real-time calculation with brand-gradient styled output.
+- **Text Compare / Diff Checker** (`/text-compare`) — compare two texts side by side with line-by-line diff (LCS algorithm), color-coded added/removed/unchanged lines, live stats, swap button, no dependencies
+
+### Changed (UI)
+- **ToolCard component** (`src/components/ui/ToolCard.tsx`) — new purpose-built card for tool grids, replacing the generic Card usage. Features: elevated white card with shadow, rounded-xl corners, hover lift animation (-translate-y-0.5 + shadow-md), brand-colored hover states on title and border, color-coded category badge (blue/amber/pink/emerald per category), optional "New"/"Popular" badge, "Open tool →" arrow indicator, full card clickable via Link wrapper with group hover. Applied to homepage and all RelatedTools sections.
+
 ### Changed (Brand)
 - **Brand color theme** — introduced cyan-to-purple gradient from favicon (`#00d4ff` → `#8b5cf6`) across the site. Logo text, primary buttons, homepage H1, card hover borders, footer category headings, dropdown highlights, focus rings, file upload buttons, and 404 page all use the brand gradient/accent. CSS custom properties `--accent-cyan` and `--accent-purple` with `.brand-gradient` and `.brand-gradient-text` utility classes.
 
