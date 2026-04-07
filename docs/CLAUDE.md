@@ -202,6 +202,10 @@ Solve simple problems, at scale.
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for folder structure, conventions, and how to add new tools.
 
+## Tools Roadmap
+
+See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 tools to implement, competitor analysis, priority matrix, and strategy for how to be better than competitors.
+
 ---
 
 ## Current Status
@@ -223,11 +227,28 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for folder structure, conventions, and 
 - QR Code Generator (`/qr-code-generator`)
 - QR Code Scanner (`/qr-code-scanner`)
 - Color Picker from Image (`/color-picker`)
+- Image Resizer (`/image-resizer`)
+- Image Format Converter (`/image-converter`)
+- Image Cropper (`/image-cropper`)
+
+**Text Tools**
+- Word Counter (`/word-counter`)
+- Case Converter (`/case-converter`)
 
 **Utilities**
 - Time Zone Converter (`/timezone-converter`)
 - Random Name Picker (`/random-name-picker`)
 - Age Calculator (`/age-calculator`)
+- Percentage Calculator (`/percentage-calculator`)
+- Random Number Generator (`/random-number-generator`)
+
+**More Developer Tools**
+- URL Encoder / Decoder (`/url-encoder`)
+- Timestamp Converter (`/timestamp-converter`)
+- Lorem Ipsum Generator (`/lorem-ipsum-generator`)
+- Hash Generator (`/hash-generator`)
+- Number Base Converter (`/number-base-converter`)
+- Slug Generator (`/slug-generator`)
 
 ### Project Structure
 - Shared layout (Navbar + Footer) in root layout

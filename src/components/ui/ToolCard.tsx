@@ -21,6 +21,7 @@ const badgeLabels = {
 
 const categoryBadgeColors: Record<ToolCategory, string> = {
   dev: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
+  text: "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
   security:
     "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
   media:

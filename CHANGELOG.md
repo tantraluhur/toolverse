@@ -8,6 +8,27 @@ All notable changes to Toolverse are documented here.
 - **Age Calculator** (`/age-calculator`) — calculate exact age in years, months, and days from date of birth. Shows total months, total days, and next birthday countdown. Handles leap years and edge cases. Real-time calculation with brand-gradient styled output.
 - **Text Compare / Diff Checker** (`/text-compare`) — compare two texts side by side with line-by-line diff (LCS algorithm), color-coded added/removed/unchanged lines, live stats, swap button, no dependencies
 
+### Added (Image Tools)
+- **Image Resizer** (`/image-resizer`) — resize images with custom width/height, aspect ratio lock, Canvas API, download result. Zero dependencies.
+- **Image Format Converter** (`/image-converter`) — convert between PNG, JPG, and WebP. JPEG quality slider. Shows file size before/after. Canvas API only.
+- **Image Cropper** (`/image-cropper`) — crop images with visual overlay, preset aspect ratios (Free, 1:1, 4:3, 16:9, 3:2), pixel-precise inputs, download cropped result. Canvas API only.
+
+### Added (Phase 1 — 10 High-Impact Tools)
+- **Word Counter** (`/word-counter`) — count words, characters (with/without spaces), sentences, paragraphs, and reading time. Live stats as you type.
+- **Case Converter** (`/case-converter`) — convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE.
+- **URL Encoder / Decoder** (`/url-encoder`) — encode/decode URLs and query strings using encodeURIComponent/decodeURIComponent. Side-by-side input/output.
+- **Timestamp Converter** (`/timestamp-converter`) — convert Unix timestamps to human-readable dates and vice versa. Supports seconds and milliseconds. "Now" button.
+- **Lorem Ipsum Generator** (`/lorem-ipsum-generator`) — generate placeholder text by paragraphs, sentences, or words. Classic Lorem Ipsum with copy button.
+- **Hash Generator** (`/hash-generator`) — generate SHA-1, SHA-256, SHA-512 hashes using the Web Crypto API. Live calculation with copy per hash.
+- **Number Base Converter** (`/number-base-converter`) — convert between Binary, Octal, Decimal, and Hexadecimal. Live conversion with validation.
+- **Percentage Calculator** (`/percentage-calculator`) — three calculators: "X% of Y", "X is what % of Y", "% change from X to Y".
+- **Random Number Generator** (`/random-number-generator`) — generate random numbers in any range with crypto.getRandomValues. Integer toggle, bulk generation.
+- **Slug Generator** (`/slug-generator`) — convert text to URL-friendly slugs with separator options. Live conversion with character count.
+- Added "text" category back to ToolCategory for Word Counter and Case Converter.
+
+### Added (Docs)
+- **Tools Roadmap** (`docs/TOOLS_ROADMAP.md`) — comprehensive 60-tool roadmap in 5 phases, competitor analysis, priority matrix, UI strategy, and category restructure plan
+
 ### Changed (UI)
 - **Input component rebuilt** — now handles all input types: text, date, time, file, checkbox, range. Auto-detects variant from `type` prop. Consistent brand styling (accent-purple focus rings, accent slider/checkbox). Checkbox renders inline with label. All raw `<input>` elements across the codebase replaced: password-checker, password-generator (range + 3 checkboxes), color-picker (file), qr-code-scanner (file), timezone-converter (date + time).
 - **Age Calculator calendar** — replaced year/month arrow buttons with dropdown selectors. Year dropdown shows 120 years (scrollable, auto-scrolls to selected). Month dropdown with future months greyed out. One click to jump to any year/month.

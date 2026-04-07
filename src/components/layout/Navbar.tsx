@@ -72,7 +72,7 @@ export default function Navbar() {
             </button>
 
             {toolsOpen && (
-              <div className="absolute right-0 top-full mt-2 w-64 rounded-lg border border-zinc-200 bg-white py-2 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+              <div className="absolute right-0 top-full mt-2 max-h-[70vh] w-64 overflow-y-auto overscroll-contain rounded-lg border border-zinc-200 bg-white py-2 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
                 {Object.entries(grouped).map(([category, categoryTools]) => (
                   <div key={category}>
                     <div className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">

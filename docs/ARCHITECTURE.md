@@ -134,6 +134,6 @@ All pages and components follow a mobile-first approach. Key conventions:
   name: string;        // Display name
   slug: string;        // URL slug (must match route folder name)
   description: string; // Short description for cards & meta
-  category: ToolCategory; // "dev" | "security" | "media" | "utility"
+  category: ToolCategory; // "dev" | "text" | "security" | "media" | "utility"
 }
 ```
