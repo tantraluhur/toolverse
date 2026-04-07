@@ -2,6 +2,8 @@ export interface Tool {
   name: string;
   slug: string;
   description: string;
+  shortDescription: string;
+  icon: string;
   category: ToolCategory;
 }
 
@@ -10,7 +12,8 @@ export type ToolCategory =
   | "text"
   | "security"
   | "media"
-  | "utility";
+  | "utility"
+  | "fun";
 
 export const categoryLabels: Record<ToolCategory, string> = {
   dev: "Developer Tools",
@@ -18,4 +21,5 @@ export const categoryLabels: Record<ToolCategory, string> = {
   security: "Security",
   media: "Media & Image",
   utility: "Utilities",
+  fun: "Fun & Games",
 };

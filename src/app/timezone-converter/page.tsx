@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import TimezoneConverter from "./timezone-converter";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Time Zone Converter Online",
@@ -16,6 +17,7 @@ export default function TimezoneConverterPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Time Zone Converter", description: "Convert time between time zones online for free. Supports all major time zones including UTC, EST, PST, JST, WIB, and more. No sign-up required.", url: "https://toolverse.app/timezone-converter" })} />
+      <TrackVisit slug="timezone-converter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Time Zone Converter

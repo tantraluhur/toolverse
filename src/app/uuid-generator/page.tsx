@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import UuidGenerator from "./uuid-generator";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "UUID Generator (v4) Online",
@@ -16,6 +17,7 @@ export default function UuidGeneratorPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "UUID Generator (v4)", description: "Generate random UUID v4 identifiers online for free. Create one or multiple UUIDs instantly. No sign-up required.", url: "https://toolverse.app/uuid-generator" })} />
+      <TrackVisit slug="uuid-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           UUID Generator

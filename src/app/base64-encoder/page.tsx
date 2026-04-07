@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Base64Encoder from "./base64-encoder";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Base64 Encoder & Decoder Online",
@@ -16,6 +17,7 @@ export default function Base64EncoderPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Base64 Encoder & Decoder", description: "Free online Base64 encoder and decoder. Encode text to Base64 or decode Base64 to plain text instantly. No sign-up required.", url: "https://toolverse.app/base64-encoder" })} />
+      <TrackVisit slug="base64-encoder" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Base64 Encoder & Decoder

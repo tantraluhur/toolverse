@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import WordCounter from "./word-counter";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Word Counter - Count Words, Characters & Sentences Online",
@@ -16,6 +17,7 @@ export default function WordCounterPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Word Counter", description: "Free online word counter tool. Count words, characters, sentences, paragraphs, and estimate reading time instantly. No sign-up required.", url: "https://toolverse.app/word-counter" })} />
+      <TrackVisit slug="word-counter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Word Counter

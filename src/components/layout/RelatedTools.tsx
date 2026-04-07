@@ -30,7 +30,8 @@ export default function RelatedTools({
             key={tool.slug}
             name={tool.name}
             slug={tool.slug}
-            description={tool.description}
+            shortDescription={tool.shortDescription}
+            icon={tool.icon}
             category={tool.category}
           />
         ))}

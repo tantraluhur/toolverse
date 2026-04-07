@@ -202,6 +202,14 @@ Solve simple problems, at scale.
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for folder structure, conventions, and how to add new tools.
 
+## Product Strategy
+
+See [PRODUCT_STRATEGY_V3.md](./PRODUCT_STRATEGY_V3.md) for the **current strategy (V3)**. Core thesis: stop trying to make utilities viral, make them habitual. Key moves: dominate SEO for top 5 tools, build browser extension, smart auto-detect on paste, brand voice rewrite.
+
+See [PRODUCT_STRATEGY_V2.md](./PRODUCT_STRATEGY_V2.md) for V2 (share card concept, tool chains — partially valid, see V3 critique for what survived).
+
+See [PRODUCT_STRATEGY.md](./PRODUCT_STRATEGY.md) for V1 (UI/UX redesign details, component specs — still useful for implementation).
+
 ## Tools Roadmap
 
 See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 tools to implement, competitor analysis, priority matrix, and strategy for how to be better than competitors.
@@ -237,10 +245,15 @@ See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 t
 
 **Utilities**
 - Time Zone Converter (`/timezone-converter`)
-- Random Name Picker (`/random-name-picker`)
 - Age Calculator (`/age-calculator`)
 - Percentage Calculator (`/percentage-calculator`)
 - Random Number Generator (`/random-number-generator`)
+
+**Fun & Games**
+- Random Name Picker (`/random-name-picker`)
+- Typing Speed Test (`/typing-test`)
+- Coin Flip (`/coin-flip`)
+- Spin the Wheel (`/spin-the-wheel`)
 
 **More Developer Tools**
 - URL Encoder / Decoder (`/url-encoder`)

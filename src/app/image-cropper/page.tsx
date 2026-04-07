@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ImageCropper from "./image-cropper";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Image Cropper Online - Crop Images Free",
@@ -16,6 +17,7 @@ export default function ImageCropperPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Image Cropper Online", description: "Crop images online for free. Select a custom region or use preset aspect ratios to crop your photos. Fast, private, and works entirely in your browser.", url: "https://toolverse.app/image-cropper" })} />
+      <TrackVisit slug="image-cropper" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Image Cropper

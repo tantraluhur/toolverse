@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import RandomNumberGenerator from "./random-number-generator";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Random Number Generator - Cryptographically Secure",
@@ -16,6 +17,7 @@ export default function RandomNumberGeneratorPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Random Number Generator", description: "Generate cryptographically secure random numbers with customizable range, count, and integer-only options. Uses crypto.getRandomValues for true randomness.", url: "https://toolverse.app/random-number-generator" })} />
+      <TrackVisit slug="random-number-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Random Number Generator

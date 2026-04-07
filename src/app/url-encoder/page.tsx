@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import UrlEncoder from "./url-encoder";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "URL Encoder / Decoder - Encode & Decode URLs Online",
@@ -16,6 +17,7 @@ export default function UrlEncoderPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "URL Encoder / Decoder", description: "Free online URL encoder and decoder. Encode special characters for URLs or decode percent-encoded strings instantly. No sign-up required.", url: "https://toolverse.app/url-encoder" })} />
+      <TrackVisit slug="url-encoder" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           URL Encoder / Decoder

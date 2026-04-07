@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PasswordGenerator from "./password-generator";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Random Password Generator",
@@ -16,6 +17,7 @@ export default function PasswordGeneratorPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Password Generator", description: "Generate strong random passwords online for free. Customize length, uppercase letters, numbers, and symbols. Uses secure cryptographic randomness. No sign-up required.", url: "https://toolverse.app/password-generator" })} />
+      <TrackVisit slug="password-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Password Generator

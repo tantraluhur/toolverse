@@ -26,6 +26,23 @@ All notable changes to Toolverse are documented here.
 - **Slug Generator** (`/slug-generator`) — convert text to URL-friendly slugs with separator options. Live conversion with character count.
 - Added "text" category back to ToolCategory for Word Counter and Case Converter.
 
+### Added (Fun & Games + WOW Features)
+- **"Fun & Games" category** — new orange-themed category for engaging/emotional tools
+- **Typing Speed Test** (`/typing-test`) — type a paragraph, see WPM, accuracy, time. Competitive, shareable score.
+- **Coin Flip** (`/coin-flip`) — heads or tails with flip animation, history tracker, stats
+- **Spin the Wheel** (`/spin-the-wheel`) — custom wheel with options, spin animation, random winner
+- **Smart Paste Auto-Detect** — paste anything on homepage, auto-detects format (JSON, JWT, Base64, URL, UUID, timestamp, binary, hex, hash, text) and suggests the right tool. The WOW factor.
+
+### Changed (V1 Product Strategy Implementation)
+- **Tool type extended** — added `icon` (text icon) and `shortDescription` (5-8 word tagline) to all 26 tools
+- **ToolCard redesigned** — icon badge with category color, short tagline instead of SEO paragraph, icon scales on hover
+- **Homepage rebuilt** — new hero section ("The fastest utility belt on the internet"), trust bar (4 signals), quick-access pill buttons for top 5 tools
+- **Recently Used** — localStorage-based tracking, horizontal scroll row on homepage showing last 5 tools visited
+- **Category filter tabs** — pill buttons to filter by All/Developer/Text/Security/Media/Utilities, toggle behavior
+- **Category section backgrounds** — each category section has a subtle tinted background (blue/violet/amber/pink/emerald)
+- **TrackVisit component** — added to all 26 tool pages to track usage in localStorage
+- **Brand voice taglines** — every tool now has a personality-driven short description for cards
+
 ### Added (Docs)
 - **Tools Roadmap** (`docs/TOOLS_ROADMAP.md`) — comprehensive 60-tool roadmap in 5 phases, competitor analysis, priority matrix, UI strategy, and category restructure plan
 

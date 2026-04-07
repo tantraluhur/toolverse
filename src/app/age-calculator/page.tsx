@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AgeCalculator from "./age-calculator";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Age Calculator - Calculate Your Age Online",
@@ -23,6 +24,7 @@ export default function AgeCalculatorPage() {
           url: "https://toolverse.app/age-calculator",
         })}
       />
+      <TrackVisit slug="age-calculator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Age Calculator

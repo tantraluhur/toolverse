@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CaseConverter from "./case-converter";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Case Converter - Transform Text Case Online",
@@ -16,6 +17,7 @@ export default function CaseConverterPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Case Converter", description: "Free online case converter. Transform text to uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and more instantly. No sign-up required.", url: "https://toolverse.app/case-converter" })} />
+      <TrackVisit slug="case-converter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Case Converter

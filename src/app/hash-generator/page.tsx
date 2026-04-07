@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import HashGenerator from "./hash-generator";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Hash Generator - SHA-1, SHA-256, SHA-512 Online",
@@ -16,6 +17,7 @@ export default function HashGeneratorPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Hash Generator", description: "Generate SHA-1, SHA-256, and SHA-512 hashes from any text instantly. Uses the Web Crypto API for accurate, browser-based hashing. Free, fast, and private.", url: "https://toolverse.app/hash-generator" })} />
+      <TrackVisit slug="hash-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Hash Generator

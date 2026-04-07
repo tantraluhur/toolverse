@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import NumberBaseConverter from "./number-base-converter";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Number Base Converter - Binary, Octal, Decimal, Hex",
@@ -16,6 +17,7 @@ export default function NumberBaseConverterPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Number Base Converter", description: "Convert numbers between binary, octal, decimal, and hexadecimal instantly. Live conversion with validation. Free online base converter tool.", url: "https://toolverse.app/number-base-converter" })} />
+      <TrackVisit slug="number-base-converter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Number Base Converter

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import QrCodeGenerator from "./qr-code-generator";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "QR Code Generator Online",
@@ -16,6 +17,7 @@ export default function QrCodeGeneratorPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "QR Code Generator", description: "Generate QR codes from text or URLs online for free. Live preview and download as PNG. Fast, private, and works entirely in your browser.", url: "https://toolverse.app/qr-code-generator" })} />
+      <TrackVisit slug="qr-code-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           QR Code Generator

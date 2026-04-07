@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PasswordChecker from "./password-checker";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Password Strength Checker Online",
@@ -16,6 +17,7 @@ export default function PasswordCheckerPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Password Strength Checker", description: "Check your password strength online for free. Get a detailed breakdown of security criteria including length, complexity, and common patterns. No sign-up required.", url: "https://toolverse.app/password-checker" })} />
+      <TrackVisit slug="password-checker" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Password Strength Checker

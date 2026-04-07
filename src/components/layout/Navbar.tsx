@@ -69,12 +69,6 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-5 text-sm sm:flex">
-          <Link
-            href="/"
-            className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-          >
-            Home
-          </Link>
 
           {/* Tools dropdown */}
           <div ref={dropdownRef} className="relative">
@@ -126,13 +120,6 @@ export default function Navbar() {
           className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain border-t border-zinc-200 bg-white px-4 pb-8 pt-2 sm:hidden dark:border-zinc-800 dark:bg-zinc-950"
           style={{ touchAction: "pan-y" }}
         >
-          <Link
-            href="/"
-            onClick={handleLinkClick}
-            className="block py-2 text-sm text-zinc-700 dark:text-zinc-300"
-          >
-            Home
-          </Link>
 
           {Object.entries(grouped).map(([category, categoryTools]) => (
             <div key={category} className="mt-3">

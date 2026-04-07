@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import RandomNamePicker from "./random-name-picker";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Random Name Picker Online",
@@ -16,6 +17,7 @@ export default function RandomNamePickerPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Random Name Picker", description: "Pick a random name from a list online for free. Perfect for giveaways, raffles, team assignments, and random decisions. No sign-up required.", url: "https://toolverse.app/random-name-picker" })} />
+      <TrackVisit slug="random-name-picker" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Random Name Picker

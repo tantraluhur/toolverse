@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LoremIpsumGenerator from "./lorem-ipsum-generator";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "Lorem Ipsum Generator - Generate Placeholder Text Online",
@@ -16,6 +17,7 @@ export default function LoremIpsumGeneratorPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "Lorem Ipsum Generator", description: "Free online Lorem Ipsum generator. Generate placeholder paragraphs, sentences, or words for your designs and mockups instantly. No sign-up required.", url: "https://toolverse.app/lorem-ipsum-generator" })} />
+      <TrackVisit slug="lorem-ipsum-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           Lorem Ipsum Generator

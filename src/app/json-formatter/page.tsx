@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import JsonFormatter from "./json-formatter";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "JSON Formatter & Validator - Pretty Print JSON Online",
@@ -16,6 +17,7 @@ export default function JsonFormatterPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "JSON Formatter & Validator", description: "Free online JSON formatter and validator. Pretty-print, minify, and validate your JSON data instantly. No sign-up required.", url: "https://toolverse.app/json-formatter" })} />
+      <TrackVisit slug="json-formatter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           JSON Formatter & Validator

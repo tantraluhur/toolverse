@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import QrCodeScanner from "./qr-code-scanner";
 import RelatedTools from "@/components/layout/RelatedTools";
 import JsonLd, { toolJsonLd } from "@/components/layout/JsonLd";
+import TrackVisit from "@/components/layout/TrackVisit";
 
 export const metadata: Metadata = {
   title: "QR Code Scanner Online",
@@ -16,6 +17,7 @@ export default function QrCodeScannerPage() {
   return (
     <>
       <JsonLd data={toolJsonLd({ name: "QR Code Scanner", description: "Scan and decode QR codes from uploaded images online for free. Upload a screenshot or photo of a QR code to read its content. No sign-up required.", url: "https://toolverse.app/qr-code-scanner" })} />
+      <TrackVisit slug="qr-code-scanner" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
           QR Code Scanner
