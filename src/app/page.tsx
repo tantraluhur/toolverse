@@ -33,7 +33,7 @@ export default function Home() {
           <p className="mt-2 text-base text-zinc-600 sm:mt-3 sm:text-lg dark:text-zinc-400">
             A collection of free online tools including JSON formatter, Base64
             encoder, password generator, QR code tools, and more. Fast, simple,
-            and privacy-focused utilities for developers and everyone.
+            and privacy-focused utilities for daily use.
           </p>
         </section>
 

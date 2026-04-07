@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Toolverse",
   },
   description:
-    "Free online tools for developers and everyday users. JSON formatter, Base64 encoder, UUID generator, password generator, QR code tools, and more. Fast, private, and works in your browser.",
+    "Free online tools for daily use. JSON formatter, Base64 encoder, UUID generator, password generator, QR code tools, and more. Fast, private, and works in your browser.",
   keywords: [
     "online tools",
     "free tools",
@@ -59,13 +59,13 @@ export const metadata: Metadata = {
     siteName: "Toolverse",
     title: "Toolverse - Free Online Tools for Developers & Everyone",
     description:
-      "Free online tools for developers and everyday users. JSON formatter, Base64 encoder, UUID generator, password generator, QR code tools, and more.",
+      "Free online tools for daily use. JSON formatter, Base64 encoder, UUID generator, password generator, QR code tools, and more.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Toolverse - Free Online Tools",
     description:
-      "Free online tools for developers and everyday users. Fast, private, and works in your browser.",
+      "Free online tools for daily use. Fast, private, and works in your browser.",
   },
   alternates: {
     canonical: "https://toolverse.app",

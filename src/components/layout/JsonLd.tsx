@@ -44,7 +44,7 @@ export function websiteJsonLd() {
     name: "Toolverse",
     url: "https://toolverse.app",
     description:
-      "Free online tools for developers and everyday users. Fast, private, and works in your browser.",
+      "Free online tools for daily use. Fast, private, and works in your browser.",
     potentialAction: {
       "@type": "SearchAction",
       target: "https://toolverse.app/?q={search_term_string}",
