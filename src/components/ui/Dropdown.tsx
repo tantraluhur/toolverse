@@ -15,6 +15,7 @@ interface DropdownProps {
   onChange?: (value: string) => void;
   placeholder?: string;
   className?: string;
+  searchable?: boolean;
 }
 
 export default function Dropdown({
@@ -25,16 +26,26 @@ export default function Dropdown({
   onChange,
   placeholder = "Select...",
   className = "",
+  searchable = false,
 }: DropdownProps) {
   const [open, setOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [search, setSearch] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
   const listboxRef = useRef<HTMLUListElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
 
   const selected = options.find((o) => String(o.value) === String(value));
   const selectedIndex = selected
     ? options.findIndex((o) => o.value === selected.value)
     : -1;
+
+  // Filter options when searchable
+  const filteredOptions = searchable && search.trim()
+    ? options.filter((o) =>
+        o.label.toLowerCase().includes(search.toLowerCase()),
+      )
+    : options;
 
   // Close on click outside
   useEffect(() => {
@@ -46,6 +57,7 @@ export default function Dropdown({
         !containerRef.current.contains(e.target as Node)
       ) {
         setOpen(false);
+        setSearch("");
       }
     }
 
@@ -53,12 +65,20 @@ export default function Dropdown({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
-  // Reset highlight when opening
+  // Reset highlight when opening, focus search
   useEffect(() => {
     if (open) {
-      setHighlightedIndex(selectedIndex >= 0 ? selectedIndex : 0);
+      const idx = filteredOptions.findIndex(
+        (o) => String(o.value) === String(value),
+      );
+      setHighlightedIndex(idx >= 0 ? idx : 0);
+      if (searchable) {
+        setTimeout(() => searchRef.current?.focus(), 0);
+      }
+    } else {
+      setSearch("");
     }
-  }, [open, selectedIndex]);
+  }, [open, searchable, filteredOptions, value]);
 
   // Scroll highlighted item into view
   useEffect(() => {
@@ -73,6 +93,7 @@ export default function Dropdown({
     (opt: DropdownOption) => {
       onChange?.(opt.value);
       setOpen(false);
+      setSearch("");
     },
     [onChange],
   );
@@ -80,12 +101,20 @@ export default function Dropdown({
   function handleKeyDown(e: React.KeyboardEvent) {
     switch (e.key) {
       case "Enter":
-      case " ":
         e.preventDefault();
         if (!open) {
           setOpen(true);
-        } else if (highlightedIndex >= 0) {
-          handleSelect(options[highlightedIndex]);
+        } else if (highlightedIndex >= 0 && filteredOptions[highlightedIndex]) {
+          handleSelect(filteredOptions[highlightedIndex]);
+        }
+        break;
+      case " ":
+        if (!searchable) {
+          e.preventDefault();
+          if (!open) setOpen(true);
+          else if (highlightedIndex >= 0 && filteredOptions[highlightedIndex]) {
+            handleSelect(filteredOptions[highlightedIndex]);
+          }
         }
         break;
       case "ArrowDown":
@@ -94,7 +123,7 @@ export default function Dropdown({
           setOpen(true);
         } else {
           setHighlightedIndex((prev) =>
-            prev < options.length - 1 ? prev + 1 : prev,
+            prev < filteredOptions.length - 1 ? prev + 1 : prev,
           );
         }
         break;
@@ -107,6 +136,7 @@ export default function Dropdown({
       case "Escape":
         e.preventDefault();
         setOpen(false);
+        setSearch("");
         break;
     }
   }
@@ -131,10 +161,12 @@ export default function Dropdown({
         aria-haspopup="listbox"
         aria-controls={id ? `${id}-listbox` : undefined}
         onClick={() => setOpen((prev) => !prev)}
-        onKeyDown={handleKeyDown}
+        onKeyDown={!searchable ? handleKeyDown : undefined}
         className="flex w-full cursor-pointer items-center justify-between rounded-md border border-zinc-300 bg-white px-3 py-2.5 text-left text-sm text-zinc-900 shadow-sm transition-colors hover:border-zinc-400 focus:border-accent-purple focus:outline-none focus:ring-1 focus:ring-accent-purple dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-zinc-600"
       >
-        <span className={selected ? "" : "text-zinc-400 dark:text-zinc-500"}>
+        <span
+          className={`truncate ${selected ? "" : "text-zinc-400 dark:text-zinc-500"}`}
+        >
           {selected ? selected.label : placeholder}
         </span>
         <ChevronIcon open={open} />
@@ -142,41 +174,61 @@ export default function Dropdown({
 
       {/* Popover */}
       {open && (
-        <ul
-          id={id ? `${id}-listbox` : undefined}
-          ref={listboxRef}
-          role="listbox"
-          aria-activedescendant={
-            highlightedIndex >= 0
-              ? `${id}-option-${highlightedIndex}`
-              : undefined
-          }
-          className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-zinc-200 bg-white py-1 shadow-lg dark:border-zinc-700 dark:bg-zinc-900"
-        >
-          {options.map((opt, i) => {
-            const isSelected = String(opt.value) === String(value);
-            const isHighlighted = i === highlightedIndex;
+        <div className="absolute z-50 mt-1 w-full rounded-md border border-zinc-200 bg-white shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+          {/* Search input */}
+          {searchable && (
+            <div className="border-b border-zinc-100 p-2 dark:border-zinc-800">
+              <input
+                ref={searchRef}
+                type="text"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setHighlightedIndex(0);
+                }}
+                onKeyDown={handleKeyDown}
+                placeholder="Search..."
+                className="w-full rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1.5 text-sm text-zinc-900 placeholder-zinc-400 focus:border-accent-purple focus:outline-none focus:ring-1 focus:ring-accent-purple dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-500"
+              />
+            </div>
+          )}
 
-            return (
-              <li
-                key={opt.value}
-                id={id ? `${id}-option-${i}` : undefined}
-                role="option"
-                aria-selected={isSelected}
-                onMouseEnter={() => setHighlightedIndex(i)}
-                onClick={() => handleSelect(opt)}
-                className={`flex cursor-pointer items-center px-3 py-2 text-sm transition-colors ${
-                  isHighlighted
-                    ? "bg-accent-purple/10 text-accent-purple dark:bg-accent-purple/15 dark:text-accent-cyan"
-                    : "text-zinc-900 dark:text-zinc-100"
-                }`}
-              >
-                <span className="flex-1">{opt.label}</span>
-                {isSelected && <CheckIcon />}
-              </li>
-            );
-          })}
-        </ul>
+          {filteredOptions.length === 0 ? (
+            <div className="px-3 py-3 text-center text-sm text-zinc-400 dark:text-zinc-500">
+              No results found
+            </div>
+          ) : (
+            <ul
+              id={id ? `${id}-listbox` : undefined}
+              ref={listboxRef}
+              role="listbox"
+              className="max-h-60 overflow-auto py-1"
+            >
+              {filteredOptions.map((opt, i) => {
+                const isSelected = String(opt.value) === String(value);
+                const isHighlighted = i === highlightedIndex;
+
+                return (
+                  <li
+                    key={opt.value}
+                    role="option"
+                    aria-selected={isSelected}
+                    onMouseEnter={() => setHighlightedIndex(i)}
+                    onClick={() => handleSelect(opt)}
+                    className={`flex cursor-pointer items-center px-3 py-2 text-sm transition-colors ${
+                      isHighlighted
+                        ? "bg-accent-purple/10 text-accent-purple dark:bg-accent-purple/15 dark:text-accent-cyan"
+                        : "text-zinc-900 dark:text-zinc-100"
+                    }`}
+                  >
+                    <span className="flex-1 truncate">{opt.label}</span>
+                    {isSelected && <CheckIcon />}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
       )}
     </div>
   );

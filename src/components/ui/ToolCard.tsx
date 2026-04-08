@@ -54,7 +54,7 @@ export default function ToolCard({
 }: ToolCardProps) {
   return (
     <Link href={`/${slug}`} className="group block h-full">
-      <div className="h-full overflow-hidden rounded-xl bg-gradient-to-r from-accent-cyan/20 via-accent-purple/20 to-accent-purple/20 p-px transition-all duration-200 group-hover:-translate-y-0.5 group-hover:from-accent-cyan group-hover:via-accent-purple group-hover:to-accent-purple group-hover:shadow-md group-hover:shadow-accent-purple/10 dark:from-accent-cyan/10 dark:via-accent-purple/10 dark:to-accent-purple/10 dark:group-hover:from-accent-cyan/70 dark:group-hover:via-accent-purple/70 dark:group-hover:to-accent-purple/70 dark:group-hover:shadow-lg dark:group-hover:shadow-accent-purple/5">
+      <div className="h-full overflow-hidden rounded-xl bg-linear-to-r from-accent-cyan/20 via-accent-purple/20 to-accent-purple/20 p-px transition-all duration-200 group-hover:-translate-y-0.5 group-hover:from-accent-cyan group-hover:via-accent-purple group-hover:to-accent-purple group-hover:shadow-md group-hover:shadow-accent-purple/10 dark:from-accent-cyan/10 dark:via-accent-purple/10 dark:to-accent-purple/10 dark:group-hover:from-accent-cyan/70 dark:group-hover:via-accent-purple/70 dark:group-hover:to-accent-purple/70 dark:group-hover:shadow-lg dark:group-hover:shadow-accent-purple/5">
         <div className="relative flex h-full flex-col rounded-[11px] bg-white p-5 sm:p-6 dark:bg-zinc-900">
           {/* Badge */}
           {badge && (

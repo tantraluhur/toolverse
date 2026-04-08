@@ -6,27 +6,106 @@ import Input from "@/components/ui/Input";
 import CopyButton from "@/components/ui/CopyButton";
 
 const timezones = [
-  { label: "UTC", value: "UTC" },
-  { label: "US/Eastern (EST/EDT)", value: "America/New_York" },
-  { label: "US/Central (CST/CDT)", value: "America/Chicago" },
-  { label: "US/Mountain (MST/MDT)", value: "America/Denver" },
-  { label: "US/Pacific (PST/PDT)", value: "America/Los_Angeles" },
-  { label: "London (GMT/BST)", value: "Europe/London" },
-  { label: "Paris (CET/CEST)", value: "Europe/Paris" },
-  { label: "Berlin (CET/CEST)", value: "Europe/Berlin" },
-  { label: "Moscow (MSK)", value: "Europe/Moscow" },
-  { label: "Dubai (GST)", value: "Asia/Dubai" },
-  { label: "India (IST)", value: "Asia/Kolkata" },
-  { label: "Bangkok (ICT)", value: "Asia/Bangkok" },
-  { label: "Jakarta (WIB)", value: "Asia/Jakarta" },
+  // UTC
+  { label: "UTC (Coordinated Universal Time)", value: "UTC" },
+
+  // North America
+  { label: "US - New York (EST/EDT)", value: "America/New_York" },
+  { label: "US - Chicago (CST/CDT)", value: "America/Chicago" },
+  { label: "US - Denver (MST/MDT)", value: "America/Denver" },
+  { label: "US - Los Angeles (PST/PDT)", value: "America/Los_Angeles" },
+  { label: "US - Anchorage (AKST/AKDT)", value: "America/Anchorage" },
+  { label: "US - Honolulu (HST)", value: "Pacific/Honolulu" },
+  { label: "US - Phoenix (MST)", value: "America/Phoenix" },
+  { label: "Canada - Toronto (EST/EDT)", value: "America/Toronto" },
+  { label: "Canada - Vancouver (PST/PDT)", value: "America/Vancouver" },
+  { label: "Mexico - Mexico City (CST/CDT)", value: "America/Mexico_City" },
+
+  // South America
+  { label: "Brazil - São Paulo (BRT)", value: "America/Sao_Paulo" },
+  { label: "Argentina - Buenos Aires (ART)", value: "America/Argentina/Buenos_Aires" },
+  { label: "Colombia - Bogotá (COT)", value: "America/Bogota" },
+  { label: "Chile - Santiago (CLT/CLST)", value: "America/Santiago" },
+  { label: "Peru - Lima (PET)", value: "America/Lima" },
+
+  // Europe
+  { label: "UK - London (GMT/BST)", value: "Europe/London" },
+  { label: "France - Paris (CET/CEST)", value: "Europe/Paris" },
+  { label: "Germany - Berlin (CET/CEST)", value: "Europe/Berlin" },
+  { label: "Spain - Madrid (CET/CEST)", value: "Europe/Madrid" },
+  { label: "Italy - Rome (CET/CEST)", value: "Europe/Rome" },
+  { label: "Netherlands - Amsterdam (CET/CEST)", value: "Europe/Amsterdam" },
+  { label: "Belgium - Brussels (CET/CEST)", value: "Europe/Brussels" },
+  { label: "Switzerland - Zurich (CET/CEST)", value: "Europe/Zurich" },
+  { label: "Sweden - Stockholm (CET/CEST)", value: "Europe/Stockholm" },
+  { label: "Norway - Oslo (CET/CEST)", value: "Europe/Oslo" },
+  { label: "Denmark - Copenhagen (CET/CEST)", value: "Europe/Copenhagen" },
+  { label: "Finland - Helsinki (EET/EEST)", value: "Europe/Helsinki" },
+  { label: "Poland - Warsaw (CET/CEST)", value: "Europe/Warsaw" },
+  { label: "Czech Republic - Prague (CET/CEST)", value: "Europe/Prague" },
+  { label: "Austria - Vienna (CET/CEST)", value: "Europe/Vienna" },
+  { label: "Greece - Athens (EET/EEST)", value: "Europe/Athens" },
+  { label: "Romania - Bucharest (EET/EEST)", value: "Europe/Bucharest" },
+  { label: "Portugal - Lisbon (WET/WEST)", value: "Europe/Lisbon" },
+  { label: "Ireland - Dublin (GMT/IST)", value: "Europe/Dublin" },
+  { label: "Russia - Moscow (MSK)", value: "Europe/Moscow" },
+  { label: "Turkey - Istanbul (TRT)", value: "Europe/Istanbul" },
+  { label: "Ukraine - Kyiv (EET/EEST)", value: "Europe/Kyiv" },
+
+  // Middle East
+  { label: "UAE - Dubai (GST)", value: "Asia/Dubai" },
+  { label: "Saudi Arabia - Riyadh (AST)", value: "Asia/Riyadh" },
+  { label: "Israel - Jerusalem (IST/IDT)", value: "Asia/Jerusalem" },
+  { label: "Qatar - Doha (AST)", value: "Asia/Qatar" },
+  { label: "Kuwait - Kuwait City (AST)", value: "Asia/Kuwait" },
+  { label: "Iran - Tehran (IRST/IRDT)", value: "Asia/Tehran" },
+  { label: "Pakistan - Karachi (PKT)", value: "Asia/Karachi" },
+
+  // South Asia
+  { label: "India - Kolkata (IST)", value: "Asia/Kolkata" },
+  { label: "Sri Lanka - Colombo (IST)", value: "Asia/Colombo" },
+  { label: "Bangladesh - Dhaka (BST)", value: "Asia/Dhaka" },
+  { label: "Nepal - Kathmandu (NPT)", value: "Asia/Kathmandu" },
+
+  // Southeast Asia
+  { label: "Thailand - Bangkok (ICT)", value: "Asia/Bangkok" },
+  { label: "Vietnam - Ho Chi Minh (ICT)", value: "Asia/Ho_Chi_Minh" },
+  { label: "Indonesia - Jakarta (WIB)", value: "Asia/Jakarta" },
+  { label: "Indonesia - Makassar (WITA)", value: "Asia/Makassar" },
+  { label: "Indonesia - Jayapura (WIT)", value: "Asia/Jayapura" },
+  { label: "Malaysia - Kuala Lumpur (MYT)", value: "Asia/Kuala_Lumpur" },
   { label: "Singapore (SGT)", value: "Asia/Singapore" },
+  { label: "Philippines - Manila (PHT)", value: "Asia/Manila" },
+  { label: "Myanmar - Yangon (MMT)", value: "Asia/Yangon" },
+  { label: "Cambodia - Phnom Penh (ICT)", value: "Asia/Phnom_Penh" },
+
+  // East Asia
+  { label: "China - Shanghai (CST)", value: "Asia/Shanghai" },
   { label: "Hong Kong (HKT)", value: "Asia/Hong_Kong" },
-  { label: "Shanghai (CST)", value: "Asia/Shanghai" },
-  { label: "Tokyo (JST)", value: "Asia/Tokyo" },
-  { label: "Seoul (KST)", value: "Asia/Seoul" },
-  { label: "Sydney (AEST/AEDT)", value: "Australia/Sydney" },
-  { label: "Auckland (NZST/NZDT)", value: "Pacific/Auckland" },
-  { label: "São Paulo (BRT)", value: "America/Sao_Paulo" },
+  { label: "Taiwan - Taipei (CST)", value: "Asia/Taipei" },
+  { label: "Japan - Tokyo (JST)", value: "Asia/Tokyo" },
+  { label: "South Korea - Seoul (KST)", value: "Asia/Seoul" },
+  { label: "Mongolia - Ulaanbaatar (ULAT)", value: "Asia/Ulaanbaatar" },
+
+  // Oceania
+  { label: "Australia - Sydney (AEST/AEDT)", value: "Australia/Sydney" },
+  { label: "Australia - Melbourne (AEST/AEDT)", value: "Australia/Melbourne" },
+  { label: "Australia - Brisbane (AEST)", value: "Australia/Brisbane" },
+  { label: "Australia - Perth (AWST)", value: "Australia/Perth" },
+  { label: "Australia - Adelaide (ACST/ACDT)", value: "Australia/Adelaide" },
+  { label: "New Zealand - Auckland (NZST/NZDT)", value: "Pacific/Auckland" },
+  { label: "Fiji - Suva (FJT)", value: "Pacific/Fiji" },
+  { label: "Papua New Guinea (PGT)", value: "Pacific/Port_Moresby" },
+
+  // Africa
+  { label: "South Africa - Johannesburg (SAST)", value: "Africa/Johannesburg" },
+  { label: "Egypt - Cairo (EET)", value: "Africa/Cairo" },
+  { label: "Nigeria - Lagos (WAT)", value: "Africa/Lagos" },
+  { label: "Kenya - Nairobi (EAT)", value: "Africa/Nairobi" },
+  { label: "Morocco - Casablanca (WET/WEST)", value: "Africa/Casablanca" },
+  { label: "Ghana - Accra (GMT)", value: "Africa/Accra" },
+  { label: "Ethiopia - Addis Ababa (EAT)", value: "Africa/Addis_Ababa" },
+  { label: "Tanzania - Dar es Salaam (EAT)", value: "Africa/Dar_es_Salaam" },
 ];
 
 export default function TimezoneConverter() {
@@ -39,7 +118,6 @@ export default function TimezoneConverter() {
 
   const converted = useMemo(() => {
     try {
-      // Parse the input as a date in the "from" timezone
       const inputDate = new Date(dateInput);
       if (isNaN(inputDate.getTime())) return null;
 
@@ -83,6 +161,8 @@ export default function TimezoneConverter() {
           options={timezones}
           value={fromTz}
           onChange={setFromTz}
+          searchable
+          placeholder="Search timezone..."
         />
         <Dropdown
           id="to-tz"
@@ -90,6 +170,8 @@ export default function TimezoneConverter() {
           options={timezones}
           value={toTz}
           onChange={setToTz}
+          searchable
+          placeholder="Search timezone..."
         />
       </div>
 
