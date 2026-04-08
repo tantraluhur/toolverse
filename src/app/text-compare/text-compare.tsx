@@ -199,15 +199,15 @@ function buildRows(ops: DiffOp[]): DiffRow[] {
 
 const sideBg: Record<string, string> = {
   equal: "",
-  removed: "bg-red-50 dark:bg-red-950/30",
-  added: "bg-green-50 dark:bg-green-950/30",
+  removed: "bg-red-500/8 dark:bg-red-500/10",
+  added: "bg-green-500/8 dark:bg-green-500/10",
   empty: "bg-zinc-50 dark:bg-zinc-900/50",
 };
 
 const sideText: Record<string, string> = {
   equal: "text-zinc-800 dark:text-zinc-200",
-  removed: "text-red-900 dark:text-red-200",
-  added: "text-green-900 dark:text-green-200",
+  removed: "text-red-400 dark:text-red-400",
+  added: "text-green-400 dark:text-green-400",
   empty: "",
 };
 
@@ -384,8 +384,8 @@ function InlineHighlight({
 }) {
   const hlClass =
     side === "left"
-      ? "bg-red-200 dark:bg-red-800/60 rounded-sm"
-      : "bg-green-200 dark:bg-green-800/60 rounded-sm";
+      ? "bg-red-500/15 dark:bg-red-500/25 rounded-sm"
+      : "bg-green-500/15 dark:bg-green-500/25 rounded-sm";
 
   return (
     <>
