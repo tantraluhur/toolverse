@@ -68,7 +68,7 @@ export const metadata: Metadata = {
       "Free online tools for daily use. Fast, private, and works in your browser.",
   },
   alternates: {
-    canonical: "https://toolverse.app",
+    canonical: "https://toolverse.web.id",
   },
 };
 
