@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://toolverse.app/sitemap.xml",
+    sitemap: "https://toolverse.web.id/sitemap.xml",
   };
 }

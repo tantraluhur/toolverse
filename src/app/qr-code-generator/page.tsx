@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Generate QR codes from text or URLs online for free. Live preview and download as PNG. Fast, private, and works entirely in your browser.",
   alternates: {
-    canonical: "https://toolverse.app/qr-code-generator",
+    canonical: "https://toolverse.web.id/qr-code-generator",
   },
 };
 
 export default function QrCodeGeneratorPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "QR Code Generator", description: "Generate QR codes from text or URLs online for free. Live preview and download as PNG. Fast, private, and works entirely in your browser.", url: "https://toolverse.app/qr-code-generator" })} />
+      <JsonLd data={toolJsonLd({ name: "QR Code Generator", description: "Generate QR codes from text or URLs online for free. Live preview and download as PNG. Fast, private, and works entirely in your browser.", url: "https://toolverse.web.id/qr-code-generator" })} />
       <TrackVisit slug="qr-code-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

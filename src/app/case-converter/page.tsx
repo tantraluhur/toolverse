@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Free online case converter. Transform text to uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and more instantly. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/case-converter",
+    canonical: "https://toolverse.web.id/case-converter",
   },
 };
 
 export default function CaseConverterPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Case Converter", description: "Free online case converter. Transform text to uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and more instantly. No sign-up required.", url: "https://toolverse.app/case-converter" })} />
+      <JsonLd data={toolJsonLd({ name: "Case Converter", description: "Free online case converter. Transform text to uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and more instantly. No sign-up required.", url: "https://toolverse.web.id/case-converter" })} />
       <TrackVisit slug="case-converter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

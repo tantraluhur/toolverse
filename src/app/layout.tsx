@@ -22,7 +22,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://toolverse.app"),
+  metadataBase: new URL("https://toolverse.web.id"),
   title: {
     default: "Toolverse - Free Online Tools for Developers & Everyone",
     template: "%s | Toolverse",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://toolverse.app",
+    url: "https://toolverse.web.id",
     siteName: "Toolverse",
     title: "Toolverse - Free Online Tools for Developers & Everyone",
     description:

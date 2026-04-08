@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Crop images online for free. Select a custom region or use preset aspect ratios to crop your photos. Fast, private, and works entirely in your browser.",
   alternates: {
-    canonical: "https://toolverse.app/image-cropper",
+    canonical: "https://toolverse.web.id/image-cropper",
   },
 };
 
 export default function ImageCropperPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Image Cropper Online", description: "Crop images online for free. Select a custom region or use preset aspect ratios to crop your photos. Fast, private, and works entirely in your browser.", url: "https://toolverse.app/image-cropper" })} />
+      <JsonLd data={toolJsonLd({ name: "Image Cropper Online", description: "Crop images online for free. Select a custom region or use preset aspect ratios to crop your photos. Fast, private, and works entirely in your browser.", url: "https://toolverse.web.id/image-cropper" })} />
       <TrackVisit slug="image-cropper" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

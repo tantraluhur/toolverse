@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Free online age calculator. Calculate your exact age in years, months, and days instantly. See your next birthday countdown.",
   alternates: {
-    canonical: "https://toolverse.app/age-calculator",
+    canonical: "https://toolverse.web.id/age-calculator",
   },
 };
 
@@ -21,7 +21,7 @@ export default function AgeCalculatorPage() {
           name: "Age Calculator",
           description:
             "Free online age calculator. Calculate your exact age in years, months, and days instantly. See your next birthday countdown.",
-          url: "https://toolverse.app/age-calculator",
+          url: "https://toolverse.web.id/age-calculator",
         })}
       />
       <TrackVisit slug="age-calculator" />

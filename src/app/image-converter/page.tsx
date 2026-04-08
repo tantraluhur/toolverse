@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Convert images between PNG, JPG, and WebP formats online for free. Adjust JPEG quality, preview before downloading, and see file size changes. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/image-converter",
+    canonical: "https://toolverse.web.id/image-converter",
   },
 };
 
@@ -21,7 +21,7 @@ export default function ImageConverterPage() {
           name: "Image Format Converter Online - PNG, JPG, WebP",
           description:
             "Convert images between PNG, JPG, and WebP formats online for free. Adjust JPEG quality, preview before downloading, and see file size changes. No sign-up required.",
-          url: "https://toolverse.app/image-converter",
+          url: "https://toolverse.web.id/image-converter",
         })}
       />
       <TrackVisit slug="image-converter" />

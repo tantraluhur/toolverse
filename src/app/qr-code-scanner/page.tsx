@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Scan and decode QR codes from uploaded images online for free. Upload a screenshot or photo of a QR code to read its content. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/qr-code-scanner",
+    canonical: "https://toolverse.web.id/qr-code-scanner",
   },
 };
 
 export default function QrCodeScannerPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "QR Code Scanner", description: "Scan and decode QR codes from uploaded images online for free. Upload a screenshot or photo of a QR code to read its content. No sign-up required.", url: "https://toolverse.app/qr-code-scanner" })} />
+      <JsonLd data={toolJsonLd({ name: "QR Code Scanner", description: "Scan and decode QR codes from uploaded images online for free. Upload a screenshot or photo of a QR code to read its content. No sign-up required.", url: "https://toolverse.web.id/qr-code-scanner" })} />
       <TrackVisit slug="qr-code-scanner" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

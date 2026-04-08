@@ -42,12 +42,12 @@ export function websiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Toolverse",
-    url: "https://toolverse.app",
+    url: "https://toolverse.web.id",
     description:
       "Free online tools for daily use. Fast, private, and works in your browser.",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://toolverse.app/?q={search_term_string}",
+      target: "https://toolverse.web.id/?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };

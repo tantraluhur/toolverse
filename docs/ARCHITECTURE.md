@@ -60,7 +60,7 @@ docs/                           # Project documentation
 
 Every tool page must:
 - Export `metadata` with a keyword-focused `title` and `description`
-- Export `metadata.alternates.canonical` pointing to `https://toolverse.app/{slug}`
+- Export `metadata.alternates.canonical` pointing to `https://toolverse.web.id/{slug}`
 - Have an `<h1>` with the primary keyword
 - Include `<JsonLd data={toolJsonLd({...})} />` for structured data (WebApplication schema)
 - Include a content section below the tool explaining what it does (for crawlers)

@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Free online word counter tool. Count words, characters, sentences, paragraphs, and estimate reading time instantly. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/word-counter",
+    canonical: "https://toolverse.web.id/word-counter",
   },
 };
 
 export default function WordCounterPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Word Counter", description: "Free online word counter tool. Count words, characters, sentences, paragraphs, and estimate reading time instantly. No sign-up required.", url: "https://toolverse.app/word-counter" })} />
+      <JsonLd data={toolJsonLd({ name: "Word Counter", description: "Free online word counter tool. Count words, characters, sentences, paragraphs, and estimate reading time instantly. No sign-up required.", url: "https://toolverse.web.id/word-counter" })} />
       <TrackVisit slug="word-counter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

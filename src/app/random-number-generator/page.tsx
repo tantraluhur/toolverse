@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Generate cryptographically secure random numbers with customizable range, count, and integer-only options. Uses crypto.getRandomValues for true randomness.",
   alternates: {
-    canonical: "https://toolverse.app/random-number-generator",
+    canonical: "https://toolverse.web.id/random-number-generator",
   },
 };
 
 export default function RandomNumberGeneratorPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Random Number Generator", description: "Generate cryptographically secure random numbers with customizable range, count, and integer-only options. Uses crypto.getRandomValues for true randomness.", url: "https://toolverse.app/random-number-generator" })} />
+      <JsonLd data={toolJsonLd({ name: "Random Number Generator", description: "Generate cryptographically secure random numbers with customizable range, count, and integer-only options. Uses crypto.getRandomValues for true randomness.", url: "https://toolverse.web.id/random-number-generator" })} />
       <TrackVisit slug="random-number-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

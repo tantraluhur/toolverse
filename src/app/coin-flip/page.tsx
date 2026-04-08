@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Flip a coin online for free. Get a fair, random heads or tails result instantly. Track your flip history and stats. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/coin-flip",
+    canonical: "https://toolverse.web.id/coin-flip",
   },
 };
 
 export default function CoinFlipPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Coin Flip", description: "Flip a coin online for free. Get a fair, random heads or tails result instantly. Track your flip history and stats. No sign-up required.", url: "https://toolverse.app/coin-flip" })} />
+      <JsonLd data={toolJsonLd({ name: "Coin Flip", description: "Flip a coin online for free. Get a fair, random heads or tails result instantly. Track your flip history and stats. No sign-up required.", url: "https://toolverse.web.id/coin-flip" })} />
       <TrackVisit slug="coin-flip" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

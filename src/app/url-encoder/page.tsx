@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Free online URL encoder and decoder. Encode special characters for URLs or decode percent-encoded strings instantly. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/url-encoder",
+    canonical: "https://toolverse.web.id/url-encoder",
   },
 };
 
 export default function UrlEncoderPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "URL Encoder / Decoder", description: "Free online URL encoder and decoder. Encode special characters for URLs or decode percent-encoded strings instantly. No sign-up required.", url: "https://toolverse.app/url-encoder" })} />
+      <JsonLd data={toolJsonLd({ name: "URL Encoder / Decoder", description: "Free online URL encoder and decoder. Encode special characters for URLs or decode percent-encoded strings instantly. No sign-up required.", url: "https://toolverse.web.id/url-encoder" })} />
       <TrackVisit slug="url-encoder" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

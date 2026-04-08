@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Free online Base64 encoder and decoder. Encode text to Base64 or decode Base64 to plain text instantly. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/base64-encoder",
+    canonical: "https://toolverse.web.id/base64-encoder",
   },
 };
 
 export default function Base64EncoderPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Base64 Encoder & Decoder", description: "Free online Base64 encoder and decoder. Encode text to Base64 or decode Base64 to plain text instantly. No sign-up required.", url: "https://toolverse.app/base64-encoder" })} />
+      <JsonLd data={toolJsonLd({ name: "Base64 Encoder & Decoder", description: "Free online Base64 encoder and decoder. Encode text to Base64 or decode Base64 to plain text instantly. No sign-up required.", url: "https://toolverse.web.id/base64-encoder" })} />
       <TrackVisit slug="base64-encoder" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

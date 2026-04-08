@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Spin a customizable wheel to pick a random option online for free. Add your own entries, spin, and let the wheel decide. Perfect for games, giveaways, and decisions.",
   alternates: {
-    canonical: "https://toolverse.app/spin-the-wheel",
+    canonical: "https://toolverse.web.id/spin-the-wheel",
   },
 };
 
 export default function SpinTheWheelPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Spin the Wheel", description: "Spin a customizable wheel to pick a random option online for free. Add your own entries, spin, and let the wheel decide. Perfect for games, giveaways, and decisions.", url: "https://toolverse.app/spin-the-wheel" })} />
+      <JsonLd data={toolJsonLd({ name: "Spin the Wheel", description: "Spin a customizable wheel to pick a random option online for free. Add your own entries, spin, and let the wheel decide. Perfect for games, giveaways, and decisions.", url: "https://toolverse.web.id/spin-the-wheel" })} />
       <TrackVisit slug="spin-the-wheel" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

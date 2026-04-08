@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Resize images to custom dimensions online for free. Set exact width and height, lock aspect ratio, preview, and download. Fast, private, and works entirely in your browser.",
   alternates: {
-    canonical: "https://toolverse.app/image-resizer",
+    canonical: "https://toolverse.web.id/image-resizer",
   },
 };
 
 export default function ImageResizerPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Image Resizer Online", description: "Resize images to custom dimensions online for free. Set exact width and height, lock aspect ratio, preview, and download. Fast, private, and works entirely in your browser.", url: "https://toolverse.app/image-resizer" })} />
+      <JsonLd data={toolJsonLd({ name: "Image Resizer Online", description: "Resize images to custom dimensions online for free. Set exact width and height, lock aspect ratio, preview, and download. Fast, private, and works entirely in your browser.", url: "https://toolverse.web.id/image-resizer" })} />
       <TrackVisit slug="image-resizer" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Convert numbers between binary, octal, decimal, and hexadecimal instantly. Live conversion with validation. Free online base converter tool.",
   alternates: {
-    canonical: "https://toolverse.app/number-base-converter",
+    canonical: "https://toolverse.web.id/number-base-converter",
   },
 };
 
 export default function NumberBaseConverterPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Number Base Converter", description: "Convert numbers between binary, octal, decimal, and hexadecimal instantly. Live conversion with validation. Free online base converter tool.", url: "https://toolverse.app/number-base-converter" })} />
+      <JsonLd data={toolJsonLd({ name: "Number Base Converter", description: "Convert numbers between binary, octal, decimal, and hexadecimal instantly. Live conversion with validation. Free online base converter tool.", url: "https://toolverse.web.id/number-base-converter" })} />
       <TrackVisit slug="number-base-converter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

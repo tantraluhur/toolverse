@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Convert any text into a clean, URL-friendly slug. Supports hyphens and underscores as separators. Live preview with character count. Free online slug generator.",
   alternates: {
-    canonical: "https://toolverse.app/slug-generator",
+    canonical: "https://toolverse.web.id/slug-generator",
   },
 };
 
 export default function SlugGeneratorPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Slug Generator", description: "Convert any text into a clean, URL-friendly slug. Supports hyphens and underscores as separators. Live preview with character count. Free online slug generator.", url: "https://toolverse.app/slug-generator" })} />
+      <JsonLd data={toolJsonLd({ name: "Slug Generator", description: "Convert any text into a clean, URL-friendly slug. Supports hyphens and underscores as separators. Live preview with character count. Free online slug generator.", url: "https://toolverse.web.id/slug-generator" })} />
       <TrackVisit slug="slug-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

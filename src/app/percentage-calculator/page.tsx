@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Calculate percentages quickly: find X% of Y, what percent X is of Y, or the percentage change between two numbers. Free online percentage calculator.",
   alternates: {
-    canonical: "https://toolverse.app/percentage-calculator",
+    canonical: "https://toolverse.web.id/percentage-calculator",
   },
 };
 
 export default function PercentageCalculatorPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Percentage Calculator", description: "Calculate percentages quickly: find X% of Y, what percent X is of Y, or the percentage change between two numbers. Free online percentage calculator.", url: "https://toolverse.app/percentage-calculator" })} />
+      <JsonLd data={toolJsonLd({ name: "Percentage Calculator", description: "Calculate percentages quickly: find X% of Y, what percent X is of Y, or the percentage change between two numbers. Free online percentage calculator.", url: "https://toolverse.web.id/percentage-calculator" })} />
       <TrackVisit slug="percentage-calculator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

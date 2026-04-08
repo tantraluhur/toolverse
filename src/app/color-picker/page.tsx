@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Pick any color from an uploaded image online for free. Get HEX, RGB, and HSL color values instantly. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/color-picker",
+    canonical: "https://toolverse.web.id/color-picker",
   },
 };
 
 export default function ColorPickerPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Color Picker from Image", description: "Pick any color from an uploaded image online for free. Get HEX, RGB, and HSL color values instantly. No sign-up required.", url: "https://toolverse.app/color-picker" })} />
+      <JsonLd data={toolJsonLd({ name: "Color Picker from Image", description: "Pick any color from an uploaded image online for free. Get HEX, RGB, and HSL color values instantly. No sign-up required.", url: "https://toolverse.web.id/color-picker" })} />
       <TrackVisit slug="color-picker" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Free online JSON formatter and validator. Pretty-print, minify, and validate your JSON data instantly. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/json-formatter",
+    canonical: "https://toolverse.web.id/json-formatter",
   },
 };
 
 export default function JsonFormatterPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "JSON Formatter & Validator", description: "Free online JSON formatter and validator. Pretty-print, minify, and validate your JSON data instantly. No sign-up required.", url: "https://toolverse.app/json-formatter" })} />
+      <JsonLd data={toolJsonLd({ name: "JSON Formatter & Validator", description: "Free online JSON formatter and validator. Pretty-print, minify, and validate your JSON data instantly. No sign-up required.", url: "https://toolverse.web.id/json-formatter" })} />
       <TrackVisit slug="json-formatter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

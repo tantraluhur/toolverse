@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Decode and inspect JWT (JSON Web Token) tokens online for free. View the header, payload, and signature with pretty-printed JSON. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/jwt-decoder",
+    canonical: "https://toolverse.web.id/jwt-decoder",
   },
 };
 
 export default function JwtDecoderPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "JWT Decoder", description: "Decode and inspect JWT (JSON Web Token) tokens online for free. View the header, payload, and signature with pretty-printed JSON. No sign-up required.", url: "https://toolverse.app/jwt-decoder" })} />
+      <JsonLd data={toolJsonLd({ name: "JWT Decoder", description: "Decode and inspect JWT (JSON Web Token) tokens online for free. View the header, payload, and signature with pretty-printed JSON. No sign-up required.", url: "https://toolverse.web.id/jwt-decoder" })} />
       <TrackVisit slug="jwt-decoder" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

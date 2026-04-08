@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Free online timestamp converter. Convert Unix timestamps to human-readable dates and dates to Unix timestamps instantly. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/timestamp-converter",
+    canonical: "https://toolverse.web.id/timestamp-converter",
   },
 };
 
 export default function TimestampConverterPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Timestamp Converter", description: "Free online timestamp converter. Convert Unix timestamps to human-readable dates and dates to Unix timestamps instantly. No sign-up required.", url: "https://toolverse.app/timestamp-converter" })} />
+      <JsonLd data={toolJsonLd({ name: "Timestamp Converter", description: "Free online timestamp converter. Convert Unix timestamps to human-readable dates and dates to Unix timestamps instantly. No sign-up required.", url: "https://toolverse.web.id/timestamp-converter" })} />
       <TrackVisit slug="timestamp-converter" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

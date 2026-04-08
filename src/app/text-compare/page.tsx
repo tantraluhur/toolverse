@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Compare two texts side by side and see the differences highlighted online for free. Line-by-line diff checker for code, documents, and more. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/text-compare",
+    canonical: "https://toolverse.web.id/text-compare",
   },
 };
 
@@ -21,7 +21,7 @@ export default function TextComparePage() {
           name: "Text Compare (Diff Checker)",
           description:
             "Compare two texts side by side and see the differences highlighted online for free. Line-by-line diff checker for code, documents, and more. No sign-up required.",
-          url: "https://toolverse.app/text-compare",
+          url: "https://toolverse.web.id/text-compare",
         })}
       />
       <TrackVisit slug="text-compare" />

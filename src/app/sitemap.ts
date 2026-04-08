@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { tools } from "@/lib/tools-registry";
 
-const BASE_URL = "https://toolverse.app";
+const BASE_URL = "https://toolverse.web.id";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const toolPages = tools.map((tool) => ({

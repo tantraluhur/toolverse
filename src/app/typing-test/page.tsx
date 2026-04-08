@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Test your typing speed online for free. See your words per minute (WPM), accuracy, and time. Practice and improve your typing skills with random paragraphs.",
   alternates: {
-    canonical: "https://toolverse.app/typing-test",
+    canonical: "https://toolverse.web.id/typing-test",
   },
 };
 
 export default function TypingTestPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Typing Speed Test", description: "Test your typing speed online for free. See your words per minute (WPM), accuracy, and time. Practice and improve your typing skills with random paragraphs.", url: "https://toolverse.app/typing-test" })} />
+      <JsonLd data={toolJsonLd({ name: "Typing Speed Test", description: "Test your typing speed online for free. See your words per minute (WPM), accuracy, and time. Practice and improve your typing skills with random paragraphs.", url: "https://toolverse.web.id/typing-test" })} />
       <TrackVisit slug="typing-test" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">

@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Free online Lorem Ipsum generator. Generate placeholder paragraphs, sentences, or words for your designs and mockups instantly. No sign-up required.",
   alternates: {
-    canonical: "https://toolverse.app/lorem-ipsum-generator",
+    canonical: "https://toolverse.web.id/lorem-ipsum-generator",
   },
 };
 
 export default function LoremIpsumGeneratorPage() {
   return (
     <>
-      <JsonLd data={toolJsonLd({ name: "Lorem Ipsum Generator", description: "Free online Lorem Ipsum generator. Generate placeholder paragraphs, sentences, or words for your designs and mockups instantly. No sign-up required.", url: "https://toolverse.app/lorem-ipsum-generator" })} />
+      <JsonLd data={toolJsonLd({ name: "Lorem Ipsum Generator", description: "Free online Lorem Ipsum generator. Generate placeholder paragraphs, sentences, or words for your designs and mockups instantly. No sign-up required.", url: "https://toolverse.web.id/lorem-ipsum-generator" })} />
       <TrackVisit slug="lorem-ipsum-generator" />
       <div className="mx-auto max-w-5xl px-4 py-6 sm:py-10">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
