@@ -197,6 +197,42 @@ export const tools: Tool[] = [
       "Crop images online for free. Select any region, set aspect ratio, and download the cropped result.",
     category: "media",
   },
+  {
+    name: "PDF Merge",
+    slug: "pdf-merge",
+    icon: "Pdf",
+    shortDescription: "Combine multiple PDFs into one file.",
+    description:
+      "Merge multiple PDF files into a single document online for free. Drag to reorder, preview page counts, download instantly. 100% client-side.",
+    category: "media",
+  },
+  {
+    name: "PDF Split",
+    slug: "pdf-split",
+    icon: "Sp",
+    shortDescription: "Split a PDF into separate files.",
+    description:
+      "Split a PDF file by page ranges or extract specific pages. Download individually or as a ZIP. 100% client-side.",
+    category: "media",
+  },
+  {
+    name: "Image to PDF",
+    slug: "image-to-pdf",
+    icon: "Im",
+    shortDescription: "Convert images to a PDF document.",
+    description:
+      "Convert multiple JPG or PNG images into a single PDF. Reorder, set page size and orientation. 100% client-side.",
+    category: "media",
+  },
+  {
+    name: "PDF to Image",
+    slug: "pdf-to-image",
+    icon: "Pi",
+    shortDescription: "Convert PDF pages to PNG or JPG images.",
+    description:
+      "Convert PDF pages to high-quality PNG or JPG images online for free. Select pages, choose resolution. 100% client-side.",
+    category: "media",
+  },
 
   // Utilities
   {

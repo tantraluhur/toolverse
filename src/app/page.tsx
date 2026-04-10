@@ -1,5 +1,5 @@
 import JsonLd, { websiteJsonLd } from "@/components/layout/JsonLd";
-import SmartPaste from "@/components/layout/SmartPaste";
+import HeroCarousel from "./hero-carousel";
 import ToolGrid from "./tool-grid";
 import { tools } from "@/lib/tools-registry";
 
@@ -12,46 +12,21 @@ export default function Home() {
 
       {/* Hero section */}
       <section className="border-b border-zinc-100 bg-gradient-to-b from-white to-zinc-50/80 dark:border-zinc-800 dark:from-zinc-950 dark:to-zinc-900/50">
-        <div className="mx-auto max-w-5xl px-4 py-10 text-center sm:py-16">
+        <div className="mx-auto max-w-5xl px-4 py-10 text-center sm:py-14">
           <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
-            <span className="brand-gradient-text">
-              The fastest utility belt
-            </span>
+            <span className="brand-gradient-text">{toolCount}+ Free Tools</span>
             <br />
             <span className="text-zinc-900 dark:text-zinc-50">
-              on the internet
+              Right in Your Browser
             </span>
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-base text-zinc-600 sm:mt-4 sm:text-lg dark:text-zinc-400">
-            A collection of free online tools including JSON formatter, Base64
-            encoder, password generator, QR code tools, and more. Fast, simple,
-            and privacy-focused utilities for daily use.
+            PDF tools, image editors, developer utilities, calculators, and
+            more. Fast and simple utilities for daily use.
           </p>
 
-          {/* Smart paste */}
-          <SmartPaste />
-
-          {/* Quick-access buttons */}
-          <div className="mt-6 flex flex-wrap justify-center gap-2 sm:mt-8">
-            {[
-              { name: "JSON Formatter", slug: "json-formatter", icon: "{ }" },
-              { name: "QR Generator", slug: "qr-code-generator", icon: "QR" },
-              { name: "Password Gen", slug: "password-generator", icon: "***" },
-              { name: "Image Resizer", slug: "image-resizer", icon: "Rs" },
-              { name: "Word Counter", slug: "word-counter", icon: "Wc" },
-            ].map((tool) => (
-              <a
-                key={tool.slug}
-                href={`/${tool.slug}`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3.5 py-2 text-sm font-medium text-zinc-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent-purple/40 hover:shadow-md hover:shadow-accent-purple/10 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-accent-purple/30"
-              >
-                <span className="text-xs font-bold text-accent-purple dark:text-accent-cyan">
-                  {tool.icon}
-                </span>
-                {tool.name}
-              </a>
-            ))}
-          </div>
+          {/* New tools carousel */}
+          <HeroCarousel />
         </div>
       </section>
 
@@ -77,7 +52,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tool grid with search + filters + recently used */}
+      {/* Tool grid */}
       <div className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
         <ToolGrid />
       </div>

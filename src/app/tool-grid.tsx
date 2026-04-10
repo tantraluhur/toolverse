@@ -10,7 +10,14 @@ const badges: Record<string, "new" | "popular"> = {
   "json-formatter": "popular",
   "password-generator": "popular",
   "qr-code-generator": "popular",
+  "age-calculator": "popular",
+  "pdf-merge": "new",
+  "pdf-split": "new",
+  "image-to-pdf": "new",
+  "pdf-to-image": "new",
 };
+
+const newToolSlugs = ["pdf-merge", "pdf-split", "image-to-pdf", "pdf-to-image"];
 
 const categoryOrder: ToolCategory[] = [
   "dev",
