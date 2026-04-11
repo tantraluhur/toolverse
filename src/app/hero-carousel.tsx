@@ -102,7 +102,10 @@ const CARD_GAP = 180;
 export default function HeroCarousel() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [animating, setAnimating] = useState(false);
   const touchStartX = useRef(0);
+  const activeRef = useRef(active);
+  activeRef.current = active;
 
   const total = slides.length;
 
@@ -111,6 +114,38 @@ export default function HeroCarousel() {
       setActive(((index % total) + total) % total);
     },
     [total],
+  );
+
+  // Animate step-by-step to a target index
+  const slideTo = useCallback(
+    (targetIndex: number) => {
+      const target = ((targetIndex % total) + total) % total;
+      if (target === activeRef.current || animating) return;
+
+      setAnimating(true);
+      setPaused(true);
+
+      // Calculate shortest circular path
+      let diff = target - activeRef.current;
+      if (diff > total / 2) diff -= total;
+      if (diff < -total / 2) diff += total;
+
+      const direction = diff > 0 ? 1 : -1;
+      const steps = Math.abs(diff);
+      const delay = Math.min(100, 600 / steps); // faster for more steps
+
+      let step = 0;
+      const interval = setInterval(() => {
+        step++;
+        goTo(activeRef.current + direction);
+        if (step >= steps) {
+          clearInterval(interval);
+          setAnimating(false);
+          setPaused(false);
+        }
+      }, delay);
+    },
+    [total, goTo, animating],
   );
 
   const next = useCallback(() => goTo(active + 1), [active, goTo]);
@@ -166,7 +201,7 @@ export default function HeroCarousel() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Section indicator */}
+      {/* Section indicator — clickable */}
       <div className="mb-4 flex items-center justify-center gap-6">
         <SectionLabel
           icon={<Star className="h-3 w-3" />}
@@ -174,6 +209,7 @@ export default function HeroCarousel() {
           active={currentSlide.section === "popular"}
           color="text-accent-purple"
           bg="bg-accent-purple/15"
+          onClick={() => slideTo(slides.findIndex((s) => s.section === "popular"))}
         />
         <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-700" />
         <SectionLabel
@@ -182,6 +218,7 @@ export default function HeroCarousel() {
           active={currentSlide.section === "new"}
           color="text-accent-cyan"
           bg="bg-accent-cyan/15"
+          onClick={() => slideTo(slides.findIndex((s) => s.section === "new"))}
           pulse
         />
       </div>
@@ -254,7 +291,7 @@ export default function HeroCarousel() {
           {slides.map((slide, i) => (
             <button
               key={i}
-              onClick={() => goTo(i)}
+              onClick={() => slideTo(i)}
               className={`cursor-pointer rounded-full transition-all duration-300 ${
                 i === active
                   ? slide.section === "popular"
@@ -288,6 +325,7 @@ function SectionLabel({
   color,
   bg,
   pulse,
+  onClick,
 }: {
   icon: React.ReactNode;
   label: string;
@@ -295,11 +333,13 @@ function SectionLabel({
   color: string;
   bg: string;
   pulse?: boolean;
+  onClick?: () => void;
 }) {
   return (
-    <div
-      className={`flex items-center gap-1.5 transition-all duration-300 ${
-        active ? "opacity-100" : "opacity-40"
+    <button
+      onClick={onClick}
+      className={`flex cursor-pointer items-center gap-1.5 transition-all duration-300 ${
+        active ? "opacity-100" : "opacity-40 hover:opacity-70"
       }`}
     >
       <span
@@ -321,7 +361,7 @@ function SectionLabel({
       >
         {label}
       </span>
-    </div>
+    </button>
   );
 }
 
@@ -371,7 +411,7 @@ function SlideCard({ slide, focused }: { slide: Slide; focused: boolean }) {
             {slide.name}
           </h3>
           <p
-            className={`leading-relaxed text-white/70 transition-all ${
+            className={`line-clamp-2 leading-relaxed text-white/70 transition-all ${
               focused ? "mt-0.5 text-sm" : "mt-0 text-xs"
             }`}
           >
