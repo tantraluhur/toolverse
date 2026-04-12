@@ -50,7 +50,7 @@ export default function QrCodeGenerator() {
     if (!canvas || !hasQr) return;
 
     const link = document.createElement("a");
-    link.download = "qrcode.png";
+    link.download = "toolverse_qrcode.png";
     link.href = canvas.toDataURL("image/png");
     link.click();
   }

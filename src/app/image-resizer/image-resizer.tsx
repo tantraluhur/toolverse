@@ -62,7 +62,7 @@ export default function ImageResizer() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `resized-${width}x${height}.png`;
+      a.download = `toolverse_resized_${width}x${height}.png`;
       a.click();
       URL.revokeObjectURL(url);
     }, "image/png");

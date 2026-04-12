@@ -65,7 +65,7 @@ export default function ImageConverter() {
       const ext = outputFormat.split("/")[1].replace("jpeg", "jpg");
       const a = document.createElement("a");
       a.href = url;
-      a.download = `converted.${ext}`;
+      a.download = `toolverse_converted.${ext}`;
       a.click();
       URL.revokeObjectURL(url);
     }, outputFormat, q);

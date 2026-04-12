@@ -285,7 +285,7 @@ export default function ImageCropper() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `cropped-${crop.w}x${crop.h}.png`;
+      a.download = `toolverse_cropped_${crop.w}x${crop.h}.png`;
       a.click();
       URL.revokeObjectURL(url);
     }, "image/png");
