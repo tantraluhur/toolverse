@@ -233,6 +233,15 @@ export const tools: Tool[] = [
       "Convert PDF pages to high-quality PNG or JPG images online for free. Select pages, choose resolution. 100% client-side.",
     category: "media",
   },
+  {
+    name: "Image Watermarker",
+    slug: "image-watermarker",
+    icon: "Wm",
+    shortDescription: "Add text or logo watermark to images.",
+    description:
+      "Add a text or image watermark to your photos online for free. Customize font, color, opacity, rotation, position, and tile. 100% client-side.",
+    category: "media",
+  },
 
   // Utilities
   {

@@ -15,9 +15,16 @@ const badges: Record<string, "new" | "popular"> = {
   "pdf-split": "new",
   "image-to-pdf": "new",
   "pdf-to-image": "new",
+  "image-watermarker": "new",
 };
 
-const newToolSlugs = ["pdf-merge", "pdf-split", "image-to-pdf", "pdf-to-image"];
+const newToolSlugs = [
+  "pdf-merge",
+  "pdf-split",
+  "image-to-pdf",
+  "pdf-to-image",
+  "image-watermarker",
+];
 
 const categoryOrder: ToolCategory[] = [
   "dev",

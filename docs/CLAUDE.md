@@ -204,11 +204,7 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for folder structure, conventions, and 
 
 ## Product Strategy
 
-See [PRODUCT_STRATEGY_V3.md](./PRODUCT_STRATEGY_V3.md) for the **current strategy (V3)**. Core thesis: stop trying to make utilities viral, make them habitual. Key moves: dominate SEO for top 5 tools, build browser extension, smart auto-detect on paste, brand voice rewrite.
-
-See [PRODUCT_STRATEGY_V2.md](./PRODUCT_STRATEGY_V2.md) for V2 (share card concept, tool chains — partially valid, see V3 critique for what survived).
-
-See [PRODUCT_STRATEGY.md](./PRODUCT_STRATEGY.md) for V1 (UI/UX redesign details, component specs — still useful for implementation).
+See [PRODUCT_STRATEGY.md](./PRODUCT_STRATEGY.md) for product strategy and UI/UX redesign details.
 
 ## Tools Roadmap
 
@@ -218,44 +214,14 @@ See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 t
 
 ## Current Status
 
-### Implemented Tools
+### Implemented Tools (34 total)
 
-**Developer Tools**
+**Developer Tools (11)**
 - JSON Formatter & Validator (`/json-formatter`)
 - Base64 Encoder & Decoder (`/base64-encoder`)
 - UUID Generator v4 (`/uuid-generator`)
 - JWT Decoder (`/jwt-decoder`)
 - Text Compare / Diff Checker (`/text-compare`)
-
-**Security**
-- Password Generator (`/password-generator`)
-- Password Strength Checker (`/password-checker`)
-
-**Media & Image**
-- QR Code Generator (`/qr-code-generator`)
-- QR Code Scanner (`/qr-code-scanner`)
-- Color Picker from Image (`/color-picker`)
-- Image Resizer (`/image-resizer`)
-- Image Format Converter (`/image-converter`)
-- Image Cropper (`/image-cropper`)
-
-**Text Tools**
-- Word Counter (`/word-counter`)
-- Case Converter (`/case-converter`)
-
-**Utilities**
-- Time Zone Converter (`/timezone-converter`)
-- Age Calculator (`/age-calculator`)
-- Percentage Calculator (`/percentage-calculator`)
-- Random Number Generator (`/random-number-generator`)
-
-**Fun & Games**
-- Random Name Picker (`/random-name-picker`)
-- Typing Speed Test (`/typing-test`)
-- Coin Flip (`/coin-flip`)
-- Spin the Wheel (`/spin-the-wheel`)
-
-**More Developer Tools**
 - URL Encoder / Decoder (`/url-encoder`)
 - Timestamp Converter (`/timestamp-converter`)
 - Lorem Ipsum Generator (`/lorem-ipsum-generator`)
@@ -263,10 +229,46 @@ See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 t
 - Number Base Converter (`/number-base-converter`)
 - Slug Generator (`/slug-generator`)
 
+**Text Tools (2)**
+- Word Counter (`/word-counter`)
+- Case Converter (`/case-converter`)
+
+**Security (2)**
+- Password Generator (`/password-generator`)
+- Password Strength Checker (`/password-checker`)
+
+**Media & Image (11)**
+- QR Code Generator (`/qr-code-generator`)
+- QR Code Scanner (`/qr-code-scanner`)
+- Color Picker from Image (`/color-picker`)
+- Image Resizer (`/image-resizer`)
+- Image Format Converter (`/image-converter`)
+- Image Cropper (`/image-cropper`)
+- PDF Merge (`/pdf-merge`)
+- PDF Split (`/pdf-split`)
+- Image to PDF (`/image-to-pdf`)
+- PDF to Image (`/pdf-to-image`)
+- Image Watermarker (`/image-watermarker`)
+
+**Utilities (4)**
+- Time Zone Converter (`/timezone-converter`)
+- Age Calculator (`/age-calculator`)
+- Percentage Calculator (`/percentage-calculator`)
+- Random Number Generator (`/random-number-generator`)
+
+**Fun & Games (4)**
+- Random Name Picker (`/random-name-picker`)
+- Typing Speed Test (`/typing-test`)
+- Coin Flip (`/coin-flip`)
+- Spin the Wheel (`/spin-the-wheel`)
+
+> Note: an empty `src/app/json-diff/` folder exists as a placeholder for a future JSON Diff tool — not yet implemented and not in the registry.
+
 ### Project Structure
-- Shared layout (Navbar + Footer) in root layout
-- Tools registry at `src/lib/tools-registry.ts`
-- Reusable UI component library in `src/components/ui/` (Button, Input, Textarea, Dropdown, Card, Alert, CopyButton, Label)
+- Shared layout (Navbar + Footer + Vercel Analytics) in root layout
+- Homepage composed of `Hero` + `HeroCarousel` (new tools) + Trust bar + `ToolGrid` (tabbed/filtered)
+- Tools registry at `src/lib/tools-registry.ts` (single source of truth — 34 tools)
+- Reusable UI component library in `src/components/ui/` (Alert, Button, Card, CopyButton, Dropdown, Input, Label, Textarea, ToolCard)
 - SEO metadata pattern established per tool page
 - Mobile-first responsive design throughout (iOS zoom prevention, 44px touch targets, stacking layouts)
 - RelatedTools component for internal cross-linking between tool pages

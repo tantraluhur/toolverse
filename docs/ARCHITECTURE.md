@@ -13,9 +13,15 @@
 ```
 src/
 ├── app/                        # Next.js App Router pages
-│   ├── layout.tsx              # Root layout (Navbar + Footer)
-│   ├── page.tsx                # Homepage (lists all tools)
+│   ├── layout.tsx              # Root layout (Navbar + Footer + Vercel Analytics)
+│   ├── page.tsx                # Homepage (Hero + Trust bar + ToolGrid)
+│   ├── hero-carousel.tsx       # Client component: "new tools" carousel for homepage hero
+│   ├── tool-grid.tsx           # Client component: tabbed/filtered tool grid for homepage
 │   ├── globals.css             # Global styles & Tailwind imports
+│   ├── sitemap.ts              # Auto-generated sitemap from tools registry
+│   ├── robots.ts               # robots.txt generator
+│   ├── not-found.tsx           # Custom 404 page
+│   ├── favicon.ico
 │   └── [tool-slug]/            # Each tool gets its own route folder
 │       ├── page.tsx            # Server component: SEO metadata + page shell
 │       └── [tool-name].tsx     # Client component: interactive tool logic
@@ -23,8 +29,11 @@ src/
 ├── components/
 │   ├── layout/                 # Shared layout components
 │   │   ├── Navbar.tsx          # Sticky header with tools dropdown (reads from registry)
-│   │   ├── Footer.tsx
-│   │   └── RelatedTools.tsx    # Reusable related tools section (takes slugs[])
+│   │   ├── Footer.tsx          # Sitewide tool link grid grouped by category
+│   │   ├── JsonLd.tsx          # JSON-LD helper + toolJsonLd() / websiteJsonLd()
+│   │   ├── RelatedTools.tsx    # Reusable related tools section (takes slugs[])
+│   │   ├── SmartPaste.tsx      # (currently unused — reserved for smart-paste feature)
+│   │   └── TrackVisit.tsx      # Mounted on tool pages to record visits (analytics)
 │   └── ui/                     # Reusable UI primitives
 │       ├── Alert.tsx           # Alert banner (error/success/warning/info)
 │       ├── Button.tsx          # Button with variants (primary/secondary/outline/danger) and sizes (sm/md/lg)
@@ -33,17 +42,20 @@ src/
 │       ├── Dropdown.tsx        # Select dropdown with label + options
 │       ├── Input.tsx           # Text input with optional label
 │       ├── Label.tsx           # Form label
-│       └── Textarea.tsx        # Textarea with optional label
+│       ├── Textarea.tsx        # Textarea with optional label
+│       └── ToolCard.tsx        # Tool grid card (homepage + RelatedTools)
 │
 ├── lib/                        # Utilities & data
-│   └── tools-registry.ts      # Central registry of all tools
+│   └── tools-registry.ts       # Central registry of all tools
 │
 └── types/                      # TypeScript type definitions
-    └── tool.ts                 # Tool & ToolCategory types
+    └── tool.ts                 # Tool & ToolCategory types + categoryLabels
 
 docs/                           # Project documentation
-├── CLAUDE.md                   # Product context & strategy
-└── ARCHITECTURE.md             # This file
+├── CLAUDE.md                   # Product context & current status
+├── ARCHITECTURE.md             # This file
+├── PRODUCT_STRATEGY.md         # V1 product strategy (UI/UX baseline)
+└── TOOLS_ROADMAP.md            # Prioritized 60-tool roadmap
 ```
 
 ## Key Conventions
@@ -131,9 +143,26 @@ All pages and components follow a mobile-first approach. Key conventions:
 
 ```ts
 {
-  name: string;        // Display name
-  slug: string;        // URL slug (must match route folder name)
-  description: string; // Short description for cards & meta
-  category: ToolCategory; // "dev" | "text" | "security" | "media" | "utility"
+  name: string;             // Display name
+  slug: string;             // URL slug (must match route folder name)
+  icon: string;             // Short text glyph shown on cards (e.g. "{ }", "B64", "QR")
+  shortDescription: string; // One-liner used on tool cards
+  description: string;      // Longer description used in meta tags & content
+  category: ToolCategory;   // "dev" | "text" | "security" | "media" | "utility" | "fun"
 }
 ```
+
+`ToolCategory` is defined in `src/types/tool.ts` along with `categoryLabels` (display labels for each category):
+
+| Category   | Label             |
+|------------|-------------------|
+| `dev`      | Developer Tools   |
+| `text`     | Text Tools        |
+| `security` | Security          |
+| `media`    | Media & Image     |
+| `utility`  | Utilities         |
+| `fun`      | Fun & Games       |
+
+Helper functions exported alongside the registry:
+- `getToolBySlug(slug)` — look up a single tool
+- `getToolsByCategory(category)` — filter tools by category

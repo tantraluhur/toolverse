@@ -11,6 +11,7 @@ import {
   Scissors,
   ImageUp,
   FileImage,
+  Stamp,
   ChevronLeft,
   ChevronRight,
   Star,
@@ -59,6 +60,14 @@ const slides: Slide[] = [
     name: "PDF to Image",
     tagline: "Pages to PNG or JPG",
     gradient: "from-violet-500 to-purple-600",
+    section: "new",
+  },
+  {
+    slug: "image-watermarker",
+    Icon: Stamp,
+    name: "Image Watermarker",
+    tagline: "Add text or logo watermark",
+    gradient: "from-cyan-500 to-teal-600",
     section: "new",
   },
   // Popular
