@@ -214,9 +214,9 @@ See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 t
 
 ## Current Status
 
-### Implemented Tools (34 total)
+### Implemented Tools (38 total)
 
-**Developer Tools (11)**
+**Developer Tools (13)**
 - JSON Formatter & Validator (`/json-formatter`)
 - Base64 Encoder & Decoder (`/base64-encoder`)
 - UUID Generator v4 (`/uuid-generator`)
@@ -228,6 +228,8 @@ See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 t
 - Hash Generator (`/hash-generator`)
 - Number Base Converter (`/number-base-converter`)
 - Slug Generator (`/slug-generator`)
+- Excel / CSV to JSON (`/excel-to-json`)
+- Excel / CSV to SQL (`/excel-to-sql`)
 
 **Text Tools (2)**
 - Word Counter (`/word-counter`)
@@ -237,7 +239,7 @@ See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 t
 - Password Generator (`/password-generator`)
 - Password Strength Checker (`/password-checker`)
 
-**Media & Image (11)**
+**Media & Image (13)**
 - QR Code Generator (`/qr-code-generator`)
 - QR Code Scanner (`/qr-code-scanner`)
 - Color Picker from Image (`/color-picker`)
@@ -248,7 +250,9 @@ See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 t
 - PDF Split (`/pdf-split`)
 - Image to PDF (`/image-to-pdf`)
 - PDF to Image (`/pdf-to-image`)
+- Excel to PDF (`/excel-to-pdf`)
 - Image Watermarker (`/image-watermarker`)
+- Video to GIF (`/video-to-gif`)
 
 **Utilities (4)**
 - Time Zone Converter (`/timezone-converter`)
@@ -267,7 +271,7 @@ See [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) for the full prioritized list of 60 t
 ### Project Structure
 - Shared layout (Navbar + Footer + Vercel Analytics) in root layout
 - Homepage composed of `Hero` + `HeroCarousel` (new tools) + Trust bar + `ToolGrid` (tabbed/filtered)
-- Tools registry at `src/lib/tools-registry.ts` (single source of truth — 34 tools)
+- Tools registry at `src/lib/tools-registry.ts` (single source of truth — 38 tools)
 - Reusable UI component library in `src/components/ui/` (Alert, Button, Card, CopyButton, Dropdown, Input, Label, Textarea, ToolCard)
 - SEO metadata pattern established per tool page
 - Mobile-first responsive design throughout (iOS zoom prevention, 44px touch targets, stacking layouts)

@@ -5,8 +5,18 @@ All notable changes to Toolverse are documented here.
 ## [Unreleased]
 
 ### Added (Tools)
+- **Excel to PDF** (`/excel-to-pdf`) — drag-and-drop spreadsheet → PDF. Parses `.xlsx` / `.xls` with SheetJS, lays out each sheet as a styled table with jsPDF + jspdf-autotable. Sheet selector with "All sheets" option (one sheet per PDF page), page size (A4 / Letter), orientation (portrait / landscape), margin slider, fit-to-page width, optional cell range (`A1:E50`), section title for multi-sheet exports, and page-number footer. Numeric columns auto right-aligned, header row tinted with brand purple, alternating row stripes. Both libraries dynamically imported. 100% client-side.
+- **Excel / CSV to SQL** (`/excel-to-sql`) — drag-and-drop spreadsheet → SQL INSERT statements. Supports `.xlsx`, `.xls`, `.csv`. MySQL / PostgreSQL / SQLite dialects with correct identifier quoting (backticks / double quotes) and safe string escaping. Per-dialect type inference (INT, DOUBLE/REAL, BOOLEAN, DATE, DATETIME/TIMESTAMP, TEXT) shown in the table preview headers. Options: CREATE TABLE generation, batch insert with configurable batch size, INSERT IGNORE (dialect-aware: `INSERT IGNORE`, `INSERT OR IGNORE`, `ON CONFLICT DO NOTHING`), include-column-names toggle. Lightweight SQL syntax highlighter in the preview. Empty cells become `NULL`. 100% client-side.
+- **Excel / CSV to JSON** (`/excel-to-json`) — drag-and-drop spreadsheet → JSON converter. Supports `.xlsx`, `.xls`, `.csv`. Auto-detects headers, infers types (number, boolean, ISO date), handles multi-sheet workbooks with a sheet selector. Table preview, JSON preview, copy + download. Output options: pretty / minified, array vs NDJSON, empty cells as null, key formatting (original / camelCase / snake_case / kebab-case). Dynamically imports SheetJS to keep the initial bundle small. 100% client-side.
+- **Video to GIF** (`/video-to-gif`) — convert MP4, MOV, or WebM videos to animated GIFs with drag-and-drop upload, dual-handle trim slider, FPS / resolution / quality / speed controls, reverse + loop toggles, live progress bar with cancel, and inline GIF preview. Frame-by-frame encoding via the `gifenc` library with `requestAnimationFrame` yielding to keep the UI responsive. 100% client-side.
+- **Image Watermarker** (`/image-watermarker`) — add a text or logo watermark to any image. Font, color, opacity, rotation, bold/italic; logo scale + opacity; five preset positions plus drag-to-place; tile mode with rotation/spacing; safe-margin; PNG or JPG export with quality slider. Canvas API only.
 - **Age Calculator** (`/age-calculator`) — calculate exact age in years, months, and days from date of birth. Shows total months, total days, and next birthday countdown. Handles leap years and edge cases. Real-time calculation with brand-gradient styled output.
 - **Text Compare / Diff Checker** (`/text-compare`) — compare two texts side by side with line-by-line diff (LCS algorithm), color-coded added/removed/unchanged lines, live stats, swap button, no dependencies
+
+### Added (Dependencies)
+- **gifenc** — lightweight, MIT-licensed GIF encoder. Used by the Video to GIF tool. Dynamically imported so it stays out of the initial bundle.
+- **xlsx (SheetJS)** — spreadsheet parser used by the Excel / CSV to JSON tool. Dynamically imported.
+- **jspdf + jspdf-autotable** — client-side PDF generator and table plugin used by the Excel to PDF tool. Dynamically imported.
 
 ### Added (Image Tools)
 - **Image Resizer** (`/image-resizer`) — resize images with custom width/height, aspect ratio lock, Canvas API, download result. Zero dependencies.

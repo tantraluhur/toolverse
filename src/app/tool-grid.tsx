@@ -7,24 +7,15 @@ import { categoryLabels, type ToolCategory } from "@/types/tool";
 import ToolCard from "@/components/ui/ToolCard";
 
 const badges: Record<string, "new" | "popular"> = {
+  "pdf-merge": "popular",
+  "image-to-pdf": "popular",
   "json-formatter": "popular",
-  "password-generator": "popular",
-  "qr-code-generator": "popular",
-  "age-calculator": "popular",
-  "pdf-merge": "new",
-  "pdf-split": "new",
-  "image-to-pdf": "new",
-  "pdf-to-image": "new",
   "image-watermarker": "new",
+  "video-to-gif": "new",
+  "excel-to-json": "new",
+  "excel-to-sql": "new",
+  "excel-to-pdf": "new",
 };
-
-const newToolSlugs = [
-  "pdf-merge",
-  "pdf-split",
-  "image-to-pdf",
-  "pdf-to-image",
-  "image-watermarker",
-];
 
 const categoryOrder: ToolCategory[] = [
   "dev",

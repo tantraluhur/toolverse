@@ -101,6 +101,33 @@ export const tools: Tool[] = [
       "Convert any text into a clean, URL-friendly slug. Remove special characters and spaces instantly.",
     category: "dev",
   },
+  {
+    name: "Excel / CSV to JSON",
+    slug: "excel-to-json",
+    icon: "xJ",
+    shortDescription: "Convert spreadsheets to clean JSON.",
+    description:
+      "Convert Excel (.xlsx, .xls) and CSV files to JSON online for free. Multi-sheet support, type detection, key formatting. 100% client-side.",
+    category: "dev",
+  },
+  {
+    name: "Excel / CSV to SQL",
+    slug: "excel-to-sql",
+    icon: "xS",
+    shortDescription: "Spreadsheets to SQL INSERT statements.",
+    description:
+      "Convert Excel and CSV rows to SQL INSERT statements for MySQL, PostgreSQL, or SQLite. Type inference, CREATE TABLE, batch inserts. 100% client-side.",
+    category: "dev",
+  },
+  {
+    name: "Excel to PDF",
+    slug: "excel-to-pdf",
+    icon: "xP",
+    shortDescription: "Turn spreadsheets into PDF documents.",
+    description:
+      "Convert Excel (.xlsx, .xls) spreadsheets to clean PDF documents online for free. Pick sheet, page size, orientation, margins, fit-to-page. 100% client-side.",
+    category: "media",
+  },
 
   // Text Tools
   {
@@ -240,6 +267,15 @@ export const tools: Tool[] = [
     shortDescription: "Add text or logo watermark to images.",
     description:
       "Add a text or image watermark to your photos online for free. Customize font, color, opacity, rotation, position, and tile. 100% client-side.",
+    category: "media",
+  },
+  {
+    name: "Video to GIF",
+    slug: "video-to-gif",
+    icon: "Gif",
+    shortDescription: "Turn a video clip into an animated GIF.",
+    description:
+      "Convert MP4, MOV, or WebM videos into animated GIFs online for free. Trim, choose FPS, resolution, and quality. 100% client-side.",
     category: "media",
   },
 
