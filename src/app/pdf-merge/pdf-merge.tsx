@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { PDFDocument } from "pdf-lib";
 import Button from "@/components/ui/Button";
 
@@ -10,6 +10,14 @@ interface PdfFile {
   size: number;
   pageCount: number;
   data: Uint8Array;
+}
+
+interface PageItem {
+  id: string;          // unique per source (file+page)
+  fileId: string;
+  fileName: string;
+  pageIndex: number;   // 0-based within source PDF
+  thumbUrl: string;    // jpeg data URL
 }
 
 function formatBytes(bytes: number): string {
@@ -24,16 +32,67 @@ function generateId(): string {
 
 export default function PdfMerge() {
   const [files, setFiles] = useState<PdfFile[]>([]);
+  const [pages, setPages] = useState<PageItem[]>([]);
   const [merging, setMerging] = useState(false);
+  const [thumbing, setThumbing] = useState(false);
   const [error, setError] = useState("");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [mergedSize, setMergedSize] = useState(0);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const dragItemRef = useRef<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const pdfjsRef = useRef<typeof import("pdfjs-dist") | null>(null);
 
-  const totalPages = files.reduce((sum, f) => sum + f.pageCount, 0);
+  // Lazy-load pdfjs for thumbnails
+  useEffect(() => {
+    let cancelled = false;
+    import("pdfjs-dist").then((mod) => {
+      if (cancelled) return;
+      mod.GlobalWorkerOptions.workerSrc = new URL(
+        "pdfjs-dist/build/pdf.worker.mjs",
+        import.meta.url,
+      ).toString();
+      pdfjsRef.current = mod;
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+
+  function clearPreview() {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    setPreviewUrl(null);
+    setMergedSize(0);
+  }
+
+  async function generateThumbsForFile(file: PdfFile): Promise<PageItem[]> {
+    const pdfjs = pdfjsRef.current;
+    if (!pdfjs) return [];
+    const doc = await pdfjs.getDocument({ data: file.data.slice().buffer }).promise;
+    const items: PageItem[] = [];
+    for (let i = 1; i <= doc.numPages; i++) {
+      const page = await doc.getPage(i);
+      const viewport = page.getViewport({ scale: 0.4 });
+      const canvas = document.createElement("canvas");
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) continue;
+      await page.render({ canvasContext: ctx, viewport, canvas }).promise;
+      items.push({
+        id: `${file.id}-${i - 1}`,
+        fileId: file.id,
+        fileName: file.name,
+        pageIndex: i - 1,
+        thumbUrl: canvas.toDataURL("image/jpeg", 0.72),
+      });
+      // Yield to the event loop so the UI stays responsive
+      await new Promise((r) => requestAnimationFrame(() => r(undefined)));
+    }
+    return items;
+  }
 
   const addFiles = useCallback(async (fileList: FileList | File[]) => {
     setError("");
@@ -66,10 +125,30 @@ export default function PdfMerge() {
       }
     }
 
-    if (newFiles.length > 0) {
-      setFiles((prev) => [...prev, ...newFiles]);
-      clearPreview();
+    if (newFiles.length === 0) return;
+
+    setFiles((prev) => [...prev, ...newFiles]);
+    clearPreview();
+
+    // Wait for pdfjs to be ready (it usually is by the time the user uploads)
+    if (!pdfjsRef.current) {
+      for (let i = 0; i < 50 && !pdfjsRef.current; i++) {
+        await new Promise((r) => setTimeout(r, 100));
+      }
     }
+
+    setThumbing(true);
+    try {
+      for (const f of newFiles) {
+        const items = await generateThumbsForFile(f);
+        setPages((prev) => [...prev, ...items]);
+      }
+    } catch {
+      setError("Failed to render page thumbnails. The PDF may be encrypted.");
+    } finally {
+      setThumbing(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleFileInput(e: React.ChangeEvent<HTMLInputElement>) {
@@ -83,7 +162,6 @@ export default function PdfMerge() {
     e.preventDefault();
     e.stopPropagation();
     setDragOverIndex(null);
-
     if (e.dataTransfer.files.length > 0) {
       addFiles(e.dataTransfer.files);
     }
@@ -95,11 +173,17 @@ export default function PdfMerge() {
 
   function removeFile(id: string) {
     setFiles((prev) => prev.filter((f) => f.id !== id));
+    setPages((prev) => prev.filter((p) => p.fileId !== id));
     clearPreview();
   }
 
-  function moveFile(fromIndex: number, toIndex: number) {
-    setFiles((prev) => {
+  function removePage(id: string) {
+    setPages((prev) => prev.filter((p) => p.id !== id));
+    clearPreview();
+  }
+
+  function movePage(fromIndex: number, toIndex: number) {
+    setPages((prev) => {
       const next = [...prev];
       const [item] = next.splice(fromIndex, 1);
       next.splice(toIndex, 0, item);
@@ -108,17 +192,21 @@ export default function PdfMerge() {
     clearPreview();
   }
 
-  function handleRowDragStart(index: number) {
+  function handlePageDragStart(index: number) {
     dragItemRef.current = index;
   }
 
-  function handleRowDragEnter(index: number) {
+  function handlePageDragEnter(index: number) {
     setDragOverIndex(index);
   }
 
-  function handleRowDragEnd() {
-    if (dragItemRef.current !== null && dragOverIndex !== null && dragItemRef.current !== dragOverIndex) {
-      moveFile(dragItemRef.current, dragOverIndex);
+  function handlePageDragEnd() {
+    if (
+      dragItemRef.current !== null &&
+      dragOverIndex !== null &&
+      dragItemRef.current !== dragOverIndex
+    ) {
+      movePage(dragItemRef.current, dragOverIndex);
     }
     dragItemRef.current = null;
     setDragOverIndex(null);
@@ -126,16 +214,9 @@ export default function PdfMerge() {
 
   function clearAll() {
     setFiles([]);
+    setPages([]);
     setError("");
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    setPreviewUrl(null);
-    setMergedSize(0);
-  }
-
-  function clearPreview() {
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    setPreviewUrl(null);
-    setMergedSize(0);
+    clearPreview();
   }
 
   function handleDownload() {
@@ -147,27 +228,32 @@ export default function PdfMerge() {
   }
 
   async function handleMerge() {
-    if (files.length < 2) return;
+    if (pages.length === 0) return;
     setMerging(true);
     setError("");
 
     try {
       const merged = await PDFDocument.create();
-
-      for (const file of files) {
-        const source = await PDFDocument.load(file.data, { ignoreEncryption: true });
-        const pages = await merged.copyPages(source, source.getPageIndices());
-        for (const page of pages) {
-          merged.addPage(page);
+      // Cache loaded source PDFs so we only parse each file once
+      const sourceCache = new Map<string, PDFDocument>();
+      for (const page of pages) {
+        let src = sourceCache.get(page.fileId);
+        if (!src) {
+          const file = files.find((f) => f.id === page.fileId);
+          if (!file) continue;
+          src = await PDFDocument.load(file.data, { ignoreEncryption: true });
+          sourceCache.set(page.fileId, src);
         }
+        const [copied] = await merged.copyPages(src, [page.pageIndex]);
+        merged.addPage(copied);
       }
 
       const mergedBytes = await merged.save();
-      const blob = new Blob([mergedBytes as unknown as BlobPart], { type: "application/pdf" });
+      const blob = new Blob([mergedBytes as unknown as BlobPart], {
+        type: "application/pdf",
+      });
 
-      // Revoke old preview URL if any
       if (previewUrl) URL.revokeObjectURL(previewUrl);
-
       const url = URL.createObjectURL(blob);
       setPreviewUrl(url);
       setMergedSize(blob.size);
@@ -196,7 +282,7 @@ export default function PdfMerge() {
           Drop PDF files here or click to browse
         </p>
         <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
-          Max 50MB per file
+          Max 50MB per file &middot; drag the page tiles below to reorder
         </p>
         <input
           ref={fileInputRef}
@@ -215,16 +301,49 @@ export default function PdfMerge() {
         </div>
       )}
 
-      {/* File list */}
+      {/* File summary chips */}
       {files.length > 0 && (
-        <div className="rounded-xl border border-zinc-200 dark:border-zinc-700">
-          {/* Header */}
-          <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-700">
-            <div className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-              {files.length} file{files.length !== 1 ? "s" : ""} &middot;{" "}
-              <span className="brand-gradient-text font-bold">{totalPages}</span> pages &middot;{" "}
-              {formatBytes(totalSize)}
-            </div>
+        <div className="flex flex-wrap items-center gap-2 rounded-xl border border-zinc-200 px-3 py-2 dark:border-zinc-700">
+          <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+            Sources:
+          </span>
+          {files.map((file) => {
+            const remaining = pages.filter((p) => p.fileId === file.id).length;
+            return (
+              <span
+                key={file.id}
+                className="inline-flex items-center gap-1.5 rounded-md bg-zinc-100 px-2 py-1 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+              >
+                <span className="font-medium">{file.name}</span>
+                <span className="text-zinc-400 dark:text-zinc-500">
+                  {remaining}/{file.pageCount}
+                </span>
+                <button
+                  onClick={() => removeFile(file.id)}
+                  className="cursor-pointer text-zinc-400 hover:text-red-500 dark:hover:text-red-400"
+                  aria-label="Remove this file and its pages"
+                >
+                  <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                  </svg>
+                </button>
+              </span>
+            );
+          })}
+          <span className="ml-auto text-xs text-zinc-400 dark:text-zinc-500">
+            {formatBytes(totalSize)}
+          </span>
+        </div>
+      )}
+
+      {/* Page grid */}
+      {pages.length > 0 && (
+        <div className="rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
+          <div className="mb-2 flex items-center justify-between">
+            <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+              <span className="brand-gradient-text font-bold">{pages.length}</span>{" "}
+              page{pages.length !== 1 ? "s" : ""} &middot; drag to reorder
+            </p>
             <button
               onClick={clearAll}
               className="cursor-pointer text-xs font-medium text-zinc-400 hover:text-red-500 dark:hover:text-red-400"
@@ -232,99 +351,101 @@ export default function PdfMerge() {
               Clear all
             </button>
           </div>
-
-          {/* Rows */}
-          <ul>
-            {files.map((file, index) => (
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {pages.map((page, index) => (
               <li
-                key={file.id}
+                key={page.id}
                 draggable
-                onDragStart={() => handleRowDragStart(index)}
-                onDragEnter={() => handleRowDragEnter(index)}
-                onDragEnd={handleRowDragEnd}
+                onDragStart={() => handlePageDragStart(index)}
+                onDragEnter={() => handlePageDragEnter(index)}
+                onDragEnd={handlePageDragEnd}
                 onDragOver={(e) => e.preventDefault()}
-                className={`flex items-center gap-3 border-b border-zinc-100 px-4 py-3 last:border-b-0 dark:border-zinc-800 ${
+                className={`group relative cursor-grab overflow-hidden rounded-lg border bg-white shadow-sm transition-all active:cursor-grabbing dark:bg-zinc-900 ${
                   dragOverIndex === index
-                    ? "bg-accent-purple/5 dark:bg-accent-purple/10"
-                    : "hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                    ? "border-accent-purple ring-2 ring-accent-purple/40"
+                    : "border-zinc-200 hover:border-accent-purple/40 dark:border-zinc-700"
                 }`}
               >
-                {/* Drag handle */}
-                <span className="cursor-grab text-zinc-300 active:cursor-grabbing dark:text-zinc-600">
-                  <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M7 2a2 2 0 10.001 4.001A2 2 0 007 2zm0 6a2 2 0 10.001 4.001A2 2 0 007 8zm0 6a2 2 0 10.001 4.001A2 2 0 007 14zm6-8a2 2 0 10-.001-4.001A2 2 0 0013 6zm0 2a2 2 0 10.001 4.001A2 2 0 0013 8zm0 6a2 2 0 10.001 4.001A2 2 0 0013 14z" />
-                  </svg>
-                </span>
+                {/* Thumbnail */}
+                <div className="aspect-[3/4] bg-zinc-100 dark:bg-zinc-800">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={page.thumbUrl}
+                    alt={`${page.fileName} page ${page.pageIndex + 1}`}
+                    className="h-full w-full object-contain"
+                    draggable={false}
+                  />
+                </div>
 
-                {/* Index */}
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-zinc-100 text-xs font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                {/* Index badge */}
+                <span className="absolute left-1.5 top-1.5 inline-flex h-6 min-w-[1.5rem] items-center justify-center rounded-md bg-accent-purple px-1.5 text-[11px] font-bold text-white shadow-sm">
                   {index + 1}
                 </span>
 
-                {/* PDF icon */}
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-400">
-                  PDF
-                </span>
-
-                {/* File info */}
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                    {file.name}
-                  </p>
-                  <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                    {file.pageCount} page{file.pageCount !== 1 ? "s" : ""} &middot; {formatBytes(file.size)}
-                  </p>
-                </div>
-
-                {/* Move buttons (mobile-friendly alternative to drag) */}
-                <div className="flex gap-1">
+                {/* Move buttons (mobile-friendly) */}
+                <div className="absolute right-1.5 top-1.5 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                   <button
-                    onClick={() => index > 0 && moveFile(index, index - 1)}
+                    onClick={() => index > 0 && movePage(index, index - 1)}
                     disabled={index === 0}
-                    className="cursor-pointer rounded p-1 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-600 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-zinc-800"
-                    aria-label="Move up"
+                    className="cursor-pointer rounded bg-white/90 p-0.5 text-zinc-600 shadow-sm hover:text-zinc-900 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-zinc-900/90 dark:text-zinc-300 dark:hover:text-zinc-100"
+                    aria-label="Move left"
                   >
-                    <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clipRule="evenodd" />
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M12.79 14.77a.75.75 0 01-1.06.02L7.232 10.5l4.498-4.29a.75.75 0 011.04 1.08L9.832 10l2.938 2.71a.75.75 0 01.02 1.06z" clipRule="evenodd" />
                     </svg>
                   </button>
                   <button
-                    onClick={() => index < files.length - 1 && moveFile(index, index + 1)}
-                    disabled={index === files.length - 1}
-                    className="cursor-pointer rounded p-1 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-600 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-zinc-800"
-                    aria-label="Move down"
+                    onClick={() => index < pages.length - 1 && movePage(index, index + 1)}
+                    disabled={index === pages.length - 1}
+                    className="cursor-pointer rounded bg-white/90 p-0.5 text-zinc-600 shadow-sm hover:text-zinc-900 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-zinc-900/90 dark:text-zinc-300 dark:hover:text-zinc-100"
+                    aria-label="Move right"
                   >
-                    <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M7.21 5.23a.75.75 0 011.06-.02L12.768 9.5 8.27 13.79a.75.75 0 11-1.04-1.08L10.168 10 7.23 7.29a.75.75 0 01-.02-1.06z" clipRule="evenodd" />
                     </svg>
                   </button>
                 </div>
 
                 {/* Remove */}
                 <button
-                  onClick={() => removeFile(file.id)}
-                  className="cursor-pointer rounded p-1 text-zinc-400 transition-colors hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950 dark:hover:text-red-400"
-                  aria-label="Remove file"
+                  onClick={() => removePage(page.id)}
+                  className="absolute bottom-1.5 right-1.5 cursor-pointer rounded bg-white/90 p-0.5 text-zinc-500 opacity-0 shadow-sm transition-opacity hover:text-red-500 group-hover:opacity-100 dark:bg-zinc-900/90 dark:text-zinc-400"
+                  aria-label="Remove page"
                 >
-                  <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
                   </svg>
                 </button>
+
+                {/* Footer label */}
+                <div className="border-t border-zinc-100 px-2 py-1 dark:border-zinc-800">
+                  <p className="truncate text-[11px] text-zinc-500 dark:text-zinc-400">
+                    {page.fileName}
+                  </p>
+                  <p className="text-[11px] text-zinc-400 dark:text-zinc-500">
+                    Page {page.pageIndex + 1}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
+          {thumbing && (
+            <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+              Rendering thumbnails…
+            </p>
+          )}
         </div>
       )}
 
       {/* Actions */}
-      {files.length > 0 && !previewUrl && (
+      {pages.length > 0 && !previewUrl && (
         <div className="flex flex-wrap items-center gap-3">
           <Button
             variant="primary"
             onClick={handleMerge}
-            disabled={files.length < 2 || merging}
+            disabled={pages.length < 1 || merging || thumbing}
           >
-            {merging ? "Processing..." : `Preview`}
+            {merging ? "Processing…" : `Preview merged PDF`}
           </Button>
 
           <button
@@ -334,9 +455,9 @@ export default function PdfMerge() {
             + Add more files
           </button>
 
-          {files.length < 2 && (
+          {pages.length < 2 && (
             <p className="text-xs text-zinc-400 dark:text-zinc-500">
-              Add at least 2 PDF files to merge
+              Add more pages to merge into a multi-page PDF
             </p>
           )}
         </div>
@@ -345,7 +466,6 @@ export default function PdfMerge() {
       {/* Preview + Download */}
       {previewUrl && (
         <div className="space-y-4">
-          {/* Preview header */}
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3 dark:border-green-800 dark:bg-green-950/30">
             <div className="flex items-center gap-2">
               <svg className="h-5 w-5 text-green-600 dark:text-green-400" viewBox="0 0 20 20" fill="currentColor">
@@ -353,7 +473,7 @@ export default function PdfMerge() {
               </svg>
               <span className="text-sm font-medium text-green-800 dark:text-green-200">
                 Merged successfully &middot;{" "}
-                <span className="font-bold">{totalPages} pages</span> &middot;{" "}
+                <span className="font-bold">{pages.length} pages</span> &middot;{" "}
                 {formatBytes(mergedSize)}
               </span>
             </div>
@@ -367,7 +487,6 @@ export default function PdfMerge() {
             </div>
           </div>
 
-          {/* Add more or start over */}
           <div className="flex gap-3">
             <button
               onClick={() => fileInputRef.current?.click()}
@@ -383,7 +502,6 @@ export default function PdfMerge() {
             </button>
           </div>
 
-          {/* PDF viewer */}
           <div className="overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
             <iframe
               src={previewUrl}
